@@ -1,0 +1,58 @@
+/* src/app/main/main.component.css */
+main {
+    background-color: #f4f4f4;
+    padding: 50px;
+    text-align: center;
+  }
+  
+  button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .main-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: url('https://source.unsplash.com/1600x600/?shop,clothes') no-repeat center center;
+    background-size: cover;
+    color: white;
+  }
+  
+  .main-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .main-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: black;
+  }
+  
+  .shop-now-button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .shop-now-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .main-bg {
+    background-image: url('http://localhost:4200/images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 4rem 2rem;
+  }
+  

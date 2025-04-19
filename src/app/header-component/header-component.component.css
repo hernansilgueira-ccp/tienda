@@ -1,0 +1,42 @@
+/* src/app/header/header.component.css */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .logo h1 {
+    margin: 0;
+  }
+  
+  .logo-img {
+    width: 200px;
+    height: 100px;
+  }
+
+  input {
+    padding: 5px;
+  }
+  
+  button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: black;
+  }
+  

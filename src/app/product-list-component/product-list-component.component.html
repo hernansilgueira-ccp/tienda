@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <ngb-carousel [interval]="5000" [pauseOnHover]="true" *ngIf="products && products.length">
+    <ng-template ngbSlide *ngFor="let product of products; let i = index">
+      <div class="picsum-img-wrapper text-center">
+        <img [src]="product.image" [alt]="product.name" class="img-fluid rounded">
+      </div>
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+        <h5>{{ product.name }}</h5>
+        <p>Precio: ${{ product.price }}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
