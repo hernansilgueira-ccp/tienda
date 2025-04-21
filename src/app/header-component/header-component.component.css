@@ -1,42 +1,42 @@
-/* src/app/header/header.component.css */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .logo h1 {
-    margin: 0;
-  }
-  
-  .logo-img {
-    width: 200px;
-    height: 100px;
-  }
+.cart-sidebar.open {
+  right: 0;
+}
+.cart-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #333;      /* ← aquí */
+  z-index: 1100;
+}
 
-  input {
-    padding: 5px;
-  }
-  
-  button {
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    display: flex;
-    gap: 15px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: black;
-  }
-  
+
+/* Resto de tus estilos de header/navbar… */
+
+header {
+  position: relative; /* para que el z-index del sidebar funcione bien */
+}
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1050;
+}
+
+/* (Opcional) Si querés un contador/badge de ítems */
+.cart-badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  vertical-align: top;
+  margin-left: 4px;
+}
+
