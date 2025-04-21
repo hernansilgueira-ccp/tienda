@@ -1,42 +1,33 @@
-/* src/app/header/header.component.css */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .logo h1 {
-    margin: 0;
-  }
-  
-  .logo-img {
-    width: 200px;
-    height: 100px;
-  }
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 1050; /* encima de todo */
+}
+.cart-sidebar.open {
+  right: 0;
+}
+.cart-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #333;      /* ← aquí */
+  z-index: 1100;
+}
 
-  input {
-    padding: 5px;
-  }
-  
-  button {
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    display: flex;
-    gap: 15px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: black;
-  }
-  
+
+/* Resto de tus estilos de header/navbar… */
+
+header {
+  position: relative; /* para que el z-index del sidebar funcione bien */
+}
