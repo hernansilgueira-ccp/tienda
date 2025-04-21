@@ -9,9 +9,9 @@ body {
   h2, h3 {
     color: #333;
   }
-  
   button:hover {
     background-color: #ff4b39;
+    filter: brightness(1.15);
   }
   
 html, body { height: 100%; }

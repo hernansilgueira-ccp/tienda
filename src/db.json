@@ -1,0 +1,285 @@
+{
+    "productos": [
+      {
+        "id": 1,
+        "nombre": "Camiseta Negra",
+        "precio": 19.99,
+        "descripcion": "Camiseta básica de algodón en color negro.",
+        "imagen": "https://via.placeholder.com/150?text=Camiseta+Negra"
+      },
+      {
+        "id": 2,
+        "nombre": "Pantalón Jeans",
+        "precio": 39.99,
+        "descripcion": "Pantalón de mezclilla azul clásico.",
+        "imagen": "https://via.placeholder.com/150?text=Pantalón+Jeans"
+      },
+      {
+        "id": 3,
+        "nombre": "Zapatillas Deportivas",
+        "precio": 59.99,
+        "descripcion": "Zapatillas cómodas para correr.",
+        "imagen": "https://via.placeholder.com/150?text=Zapatillas"
+      },
+      {
+        "id": 4,
+        "nombre": "Sudadera Gris",
+        "precio": 29.99,
+        "descripcion": "Sudadera cálida de color gris claro.",
+        "imagen": "https://via.placeholder.com/150?text=Sudadera"
+      },
+      {
+        "id": 5,
+        "nombre": "Chaqueta de Cuero",
+        "precio": 89.99,
+        "descripcion": "Chaqueta elegante de cuero sintético.",
+        "imagen": "https://via.placeholder.com/150?text=Chaqueta+Cuero"
+      },
+      {
+        "id": 6,
+        "nombre": "Gorra Negra",
+        "precio": 14.99,
+        "descripcion": "Gorra casual con visera curva.",
+        "imagen": "https://via.placeholder.com/150?text=Gorra"
+      },
+      {
+        "id": 7,
+        "nombre": "Camisa Blanca",
+        "precio": 24.99,
+        "descripcion": "Camisa de vestir blanca de manga larga.",
+        "imagen": "https://via.placeholder.com/150?text=Camisa"
+      },
+      {
+        "id": 8,
+        "nombre": "Reloj Deportivo",
+        "precio": 49.99,
+        "descripcion": "Reloj resistente al agua con cronómetro.",
+        "imagen": "https://via.placeholder.com/150?text=Reloj"
+      },
+      {
+        "id": 9,
+        "nombre": "Pantalones Cortos",
+        "precio": 19.99,
+        "descripcion": "Shorts cómodos para el verano.",
+        "imagen": "https://via.placeholder.com/150?text=Shorts"
+      },
+      {
+        "id": 10,
+        "nombre": "Tenis Blancos",
+        "precio": 44.99,
+        "descripcion": "Tenis casuales de color blanco.",
+        "imagen": "https://via.placeholder.com/150?text=Tenis+Blancos"
+      },
+      {
+        "id": 11,
+        "nombre": "Bufanda de Lana",
+        "precio": 12.99,
+        "descripcion": "Bufanda suave y cálida de lana.",
+        "imagen": "https://via.placeholder.com/150?text=Bufanda"
+      },
+      {
+        "id": 12,
+        "nombre": "Cinturón de Cuero",
+        "precio": 18.99,
+        "descripcion": "Cinturón elegante para trajes.",
+        "imagen": "https://via.placeholder.com/150?text=Cinturón"
+      },
+      {
+        "id": 13,
+        "nombre": "Lentes de Sol",
+        "precio": 22.99,
+        "descripcion": "Lentes oscuros con protección UV.",
+        "imagen": "https://via.placeholder.com/150?text=Lentes"
+      },
+      {
+        "id": 14,
+        "nombre": "Bolso de Mano",
+        "precio": 34.99,
+        "descripcion": "Bolso casual para el día a día.",
+        "imagen": "https://via.placeholder.com/150?text=Bolso"
+      },
+      {
+        "id": 15,
+        "nombre": "Calcetines Deportivos",
+        "precio": 9.99,
+        "descripcion": "Pack de 3 pares de calcetines.",
+        "imagen": "https://via.placeholder.com/150?text=Calcetines"
+      },
+      {
+        "id": 16,
+        "nombre": "Zapatos de Vestir",
+        "precio": 64.99,
+        "descripcion": "Zapatos formales de cuero.",
+        "imagen": "https://via.placeholder.com/150?text=Zapatos"
+      },
+      {
+        "id": 17,
+        "nombre": "Playera Estampada",
+        "precio": 21.99,
+        "descripcion": "Playera con diseño gráfico.",
+        "imagen": "https://via.placeholder.com/150?text=Playera"
+      },
+      {
+        "id": 18,
+        "nombre": "Pijama de Algodón",
+        "precio": 27.99,
+        "descripcion": "Conjunto cómodo de pijama.",
+        "imagen": "https://via.placeholder.com/150?text=Pijama"
+      },
+      {
+        "id": 19,
+        "nombre": "Sandalias de Playa",
+        "precio": 16.99,
+        "descripcion": "Sandalias cómodas para el verano.",
+        "imagen": "https://via.placeholder.com/150?text=Sandalias"
+      },
+      {
+        "id": 20,
+        "nombre": "Chamarra Impermeable",
+        "precio": 59.99,
+        "descripcion": "Chamarra ideal para la lluvia.",
+        "imagen": "https://via.placeholder.com/150?text=Chamarra"
+      },
+      {
+        "id": 21,
+        "nombre": "Guantes de Invierno",
+        "precio": 11.99,
+        "descripcion": "Guantes térmicos para el frío.",
+        "imagen": "https://via.placeholder.com/150?text=Guantes"
+      },
+      {
+        "id": 22,
+        "nombre": "Blusa de Encaje",
+        "precio": 28.99,
+        "descripcion": "Blusa elegante con detalles en encaje.",
+        "imagen": "https://via.placeholder.com/150?text=Blusa"
+      },
+      {
+        "id": 23,
+        "nombre": "Leggings Negros",
+        "precio": 17.99,
+        "descripcion": "Leggings elásticos y cómodos.",
+        "imagen": "https://via.placeholder.com/150?text=Leggings"
+      },
+      {
+        "id": 24,
+        "nombre": "Sombrero de Paja",
+        "precio": 13.99,
+        "descripcion": "Sombrero fresco para el sol.",
+        "imagen": "https://via.placeholder.com/150?text=Sombrero"
+      },
+      {
+        "id": 25,
+        "nombre": "Mochila Escolar",
+        "precio": 31.99,
+        "descripcion": "Mochila resistente con varios compartimentos.",
+        "imagen": "https://via.placeholder.com/150?text=Mochila"
+      },
+      {
+        "id": 26,
+        "nombre": "Falda Plisada",
+        "precio": 26.99,
+        "descripcion": "Falda corta con pliegues.",
+        "imagen": "https://via.placeholder.com/150?text=Falda"
+      },
+      {
+        "id": 27,
+        "nombre": "Chaqueta de Mezclilla",
+        "precio": 49.99,
+        "descripcion": "Chaqueta clásica de jean azul.",
+        "imagen": "https://via.placeholder.com/150?text=Chaqueta+Jean"
+      },
+      {
+        "id": 28,
+        "nombre": "Botines Marrones",
+        "precio": 54.99,
+        "descripcion": "Botines casuales de cuero marrón.",
+        "imagen": "https://via.placeholder.com/150?text=Botines"
+      },
+      {
+        "id": 29,
+        "nombre": "Camiseta de Rayas",
+        "precio": 20.99,
+        "descripcion": "Camiseta con estampado a rayas.",
+        "imagen": "https://via.placeholder.com/150?text=Rayas"
+      },
+      {
+        "id": 30,
+        "nombre": "Blazer Azul",
+        "precio": 72.99,
+        "descripcion": "Blazer formal para oficina o eventos.",
+        "imagen": "https://via.placeholder.com/150?text=Blazer"
+      },
+      {
+        "id": 31,
+        "nombre": "Bikini Floral",
+        "precio": 29.99,
+        "descripcion": "Bikini con estampado tropical.",
+        "imagen": "https://via.placeholder.com/150?text=Bikini"
+      },
+      {
+        "id": 32,
+        "nombre": "Gafas Estilo Aviador",
+        "precio": 25.99,
+        "descripcion": "Gafas metálicas con diseño retro.",
+        "imagen": "https://via.placeholder.com/150?text=Gafas+Aviador"
+      },
+      {
+        "id": 33,
+        "nombre": "Bota de Montaña",
+        "precio": 69.99,
+        "descripcion": "Bota resistente para senderismo.",
+        "imagen": "https://via.placeholder.com/150?text=Bota+Montaña"
+      },
+      {
+        "id": 34,
+        "nombre": "Camiseta Oversize",
+        "precio": 22.99,
+        "descripcion": "Camiseta holgada para uso diario.",
+        "imagen": "https://via.placeholder.com/150?text=Oversize"
+      },
+      {
+        "id": 35,
+        "nombre": "Vestido Rojo",
+        "precio": 44.99,
+        "descripcion": "Vestido elegante de noche.",
+        "imagen": "https://via.placeholder.com/150?text=Vestido+Rojo"
+      },
+      {
+        "id": 36,
+        "nombre": "Polera de Algodón",
+        "precio": 18.99,
+        "descripcion": "Polera suave y fresca para el verano.",
+        "imagen": "https://via.placeholder.com/150?text=Polera"
+      },
+      {
+        "id": 37,
+        "nombre": "Reloj de Pulsera",
+        "precio": 55.99,
+        "descripcion": "Reloj elegante con correa de cuero.",
+        "imagen": "https://via.placeholder.com/150?text=Reloj+Pulsera"
+      },
+      {
+        "id": 38,
+        "nombre": "Chaqueta Corta",
+        "precio": 61.99,
+        "descripcion": "Chaqueta ligera para media estación.",
+        "imagen": "https://via.placeholder.com/150?text=Chaqueta+Corta"
+      },
+      {
+        "id": 39,
+        "nombre": "Camisón de Dormir",
+        "precio": 23.99,
+        "descripcion": "Ropa cómoda para la noche.",
+        "imagen": "https://via.placeholder.com/150?text=Camisón"
+      },
+      {
+        "id": 40,
+        "nombre": "Botas Negras",
+        "precio": 66.99,
+        "descripcion": "Botas altas de tacón.",
+        "imagen": "https://via.placeholder.com/150?text=Botas+Negras"
+      }
+    ]
+  }
+  

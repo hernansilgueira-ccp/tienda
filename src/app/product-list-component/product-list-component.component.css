@@ -166,4 +166,31 @@
   .cart-sidebar.open {
     right: 0;
   }
-  
+  /* product-list.component.css */
+.card-img-top {
+  height: 150px;
+  object-fit: cover;
+}
+/* src/app/product-list-component.component.css */
+/* Si tienes una clase contenedora para el carrusel, por ejemplo: */
+/* .mi-carousel .carousel-control-prev, */
+/* .mi-carousel .carousel-control-next { ... } */
+
+/* O directamente al componente (menos específico): */
+:host ::ng-deep .carousel-control-prev,
+:host ::ng-deep .carousel-control-next {
+  width: 30px; /* Ajusta el ancho del botón */
+  height: 30px; /* Ajusta la altura del botón */
+  border-radius: 50%; /* Para hacerlo circular (opcional) */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente (opcional) */
+  opacity: 1; /* Asegura que el botón sea visible */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+:host ::ng-deep .carousel-control-prev-icon,
+:host ::ng-deep .carousel-control-next-icon {
+  font-size: 1em; /* Ajusta el tamaño del icono */
+  width: 1em;
+  height: 1em;
+}

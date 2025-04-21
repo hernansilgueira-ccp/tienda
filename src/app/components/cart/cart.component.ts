@@ -54,6 +54,6 @@ export class CartComponent implements OnInit {
     this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de vaciar
   }
 
-  @ViewChild(CartComponent) cartComponent: CartComponent = {} as CartComponent;
+  //@ViewChild(CartComponent) cartComponent: CartComponent = {} as CartComponent;
 
 }
