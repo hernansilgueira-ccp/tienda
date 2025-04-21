@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, NgbCarouselModule, HeaderComponentComponent, 
-    MainComponentComponent, ProductListComponent,CartComponent,MatIconModule],
+    MainComponentComponent, ProductListComponent,MatIconModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

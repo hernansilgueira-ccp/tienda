@@ -38,10 +38,14 @@
   </div>
 </nav>
 
-<!-- Sidebar del carrito -->
+    <!-- ÚNICO botón de carrito en el header 
+    <button mat-flat-button color="accent" (click)="toggleCart()">
+      <mat-icon>shopping_cart</mat-icon>
+      Ver carrito
+    </button>
+    -->
 <aside class="cart-sidebar" [class.open]="isCartOpen">
-  <!-- Botón para cerrar el sidebar -->
+  <!-- Botón para cerrar -->
   <button class="cart-close" (click)="closeCart()">×</button>
-  <!-- Aquí va tu componente de carrito -->
   <app-cart></app-cart>
 </aside>
