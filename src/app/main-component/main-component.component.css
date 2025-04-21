@@ -48,7 +48,7 @@ main {
   }
   
   .main-bg {
-    background-image: url('http://localhost:4200/images/background.png');
+    /*background-image: url('http://localhost:4200/images/background-tienda.jpg');*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

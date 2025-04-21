@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponentComponent } from "./header-component/header-component.component";
-import { MainComponent } from "./main-component/main-component.component";
+import { MainComponentComponent } from "./main-component/main-component.component";
 import { ProductListComponent} from "./product-list-component/product-list-component.component";
+import { CartComponent } from './components/cart/cart.component';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, NgbCarouselModule, HeaderComponentComponent, MainComponent, ProductListComponent],
+  imports: [RouterOutlet, CommonModule, NgbCarouselModule, HeaderComponentComponent, 
+    MainComponentComponent, ProductListComponent,CartComponent,MatIconModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'tienda';
+
+  @ViewChild(CartComponent) cartComponent: CartComponent = {} as CartComponent;
+
+  toggleCart(): void {
+    this.cartComponent.toggleCart();
+  }
 }
