@@ -26,9 +26,7 @@
                type="search"
                placeholder="Buscar"
                aria-label="Buscar">
-        <button class="btn btn-outline-success" type="submit">
-          Buscar
-        </button>
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
@@ -37,16 +35,13 @@
         <li class="nav-item"><a class="nav-link" href="index.html">Ayuda</a></li>
       </ul>
     </div>
-
-    <!-- ÚNICO botón de carrito -->
-    <button mat-flat-button color="accent" (click)="toggleCart()">
-      <mat-icon>shopping_cart</mat-icon>
-      Ver carrito
-    </button>
   </div>
 </nav>
+
 <!-- Sidebar del carrito -->
 <aside class="cart-sidebar" [class.open]="isCartOpen">
+  <!-- Botón para cerrar el sidebar -->
   <button class="cart-close" (click)="closeCart()">×</button>
+  <!-- Aquí va tu componente de carrito -->
   <app-cart></app-cart>
 </aside>

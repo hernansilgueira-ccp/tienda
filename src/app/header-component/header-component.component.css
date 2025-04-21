@@ -40,6 +40,7 @@ header {
     color: black;
   }
   
+  /* ########################## */
   .cart-sidebar {
     position: fixed;
     top: 0;
@@ -47,14 +48,12 @@ header {
     width: 320px;
     height: 100%;
     background: #fff;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
     transition: right 0.3s ease;
     z-index: 2000;
   }
   .cart-sidebar.open {
     right: 0;
   }
-  
   .cart-close {
     position: absolute;
     top: 12px;
@@ -65,6 +64,4 @@ header {
     cursor: pointer;
     z-index: 2100;
   }
-  
-  /* el resto de tus estilos de header/navbar… */
-  
+    
