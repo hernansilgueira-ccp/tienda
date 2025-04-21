@@ -1,14 +1,6 @@
 <div class="container-fluid">
-    <app-header-component></app-header-component>
-    <!-- Botón para abrir el carrito -->
-    <button mat-icon-button (click)="cart.toggleCart()">
-      <mat-icon>shopping_cart</mat-icon>
-    </button>
-    <!-- Componente del carrito -->
-    <app-cart #cart></app-cart>
-    <app-main></app-main>
-    <app-product-list></app-product-list>
-    <router-outlet></router-outlet>
-    
-  </div>
-  
+  <app-header-component></app-header-component>
+  <app-main></app-main>
+  <app-product-list></app-product-list>
+  <router-outlet></router-outlet>
+</div>
