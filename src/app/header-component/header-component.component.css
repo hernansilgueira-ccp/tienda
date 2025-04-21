@@ -1,14 +1,3 @@
-.cart-sidebar {
-  position: fixed;
-  top: 0;
-  right: -320px;
-  width: 320px;
-  height: 100%;
-  background: #fff;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-  transition: right 0.3s ease;
-  z-index: 1050; /* encima de todo */
-}
 .cart-sidebar.open {
   right: 0;
 }
@@ -31,3 +20,23 @@
 header {
   position: relative; /* para que el z-index del sidebar funcione bien */
 }
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1050;
+}
+
+/* (Opcional) Si querés un contador/badge de ítems */
+.cart-badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  vertical-align: top;
+  margin-left: 4px;
+}
+

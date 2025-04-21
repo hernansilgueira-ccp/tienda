@@ -1,47 +1,50 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <!-- Logo, buscador, menú… -->
-      <a class="navbar-brand" href="index.html">
-        <img src="images/logo033_mini.png" alt="Logo de Tienda" class="img-fluid" style="max-height: 80px;">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#headerNavbar"
-        aria-controls="headerNavbar"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="headerNavbar">
-        <form class="d-flex mx-auto">
-          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html">Productos</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html">Contacto</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html">Ayuda</a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="index.html">
+      <img src="images/logo033_mini.png"
+           alt="Logo de Tienda"
+           class="img-fluid"
+           style="max-height: 80px;">
+    </a>
 
-      <!-- Botón del carrito 
-      <button class="btn btn-outline-success ms-2" (click)="toggleCart()">
-        <mat-icon>shopping_cart</mat-icon>
-      </button>
-      -->
+    <!-- Toggle móvil -->
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#headerNavbar"
+            aria-controls="headerNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Buscador + menú -->
+    <div class="collapse navbar-collapse" id="headerNavbar">
+      <form class="d-flex mx-auto">
+        <input class="form-control me-2"
+               type="search"
+               placeholder="Buscar"
+               aria-label="Buscar">
+        <button class="btn btn-outline-success" type="submit">
+          Buscar
+        </button>
+      </form>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Productos</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Ayuda</a></li>
+      </ul>
     </div>
-  </nav>
-  
-  <!-- Sidebar del carrito: fuera del <nav> -->
-  <aside class="cart-sidebar" [class.open]="isCartOpen">
-    <button class="cart-close" (click)="closeCart()">×</button>
-    <h3><mat-icon>shopping_cart</mat-icon> Carrito</h3>
-    <p *ngIf="!items.length">Tu carrito está vacío.</p>
-    <!-- …contenido del carrito… -->
-  </aside>
-</header>
+
+    <!-- Único botón de carrito -->
+    <button mat-flat-button color="accent" (click)="toggleCart()">
+      <mat-icon>shopping_cart</mat-icon>
+      Ver carrito
+    </button>
+  </div>
+</nav>
+
+<!-- Solo renderiza el carrito si isCartOpen = true -->
+<app-cart *ngIf="isCartOpen" class="cart-sidebar"></app-cart>
