@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit {
         quantity: 1,
         agregado: false
       }));
-      this.productosAgrupados = this.agruparProductos(this.productos, 8);
+      this.productosAgrupados = this.agruparProductos(this.productos, 4);
     });
   }
   agruparProductos(lista: Producto[], tamañoGrupo: number): Producto[][] {
