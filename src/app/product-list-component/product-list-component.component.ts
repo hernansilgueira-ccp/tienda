@@ -23,7 +23,11 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getProductos().subscribe((data: Producto[]) => {
-      this.productos = data;
+      this.productos = data.map(p => ({
+        ...p,
+        quantity: 1,
+        agregado: false
+      }));
       this.productosAgrupados = this.agruparProductos(this.productos, 4);
     });
   }
@@ -44,33 +48,37 @@ export class ProductListComponent implements OnInit {
     this.currentSlide = isNaN(slideId) ? 0 : slideId;
   }
   
-  agregarAlCarrito(producto: any): void {
-    this.cartService.addToCart(producto);
+  incrementQuantity(producto: Producto) {
+    producto.quantity++;
   }
   
-   /*
-  
-  incrementQuantity(index: number) {
-    this.products[index].quantity++;
-  }
-  
-  decrementQuantity(index: number) {
-    if (this.products[index].quantity > 1) {
-      this.products[index].quantity--;
+  decrementQuantity(producto: Producto) {
+    if (producto.quantity > 1) {
+      producto.quantity--;
     }
   }
-  addToCart(product: any) {
-    const producto = this.products[this.currentSlide];
+  agregarAlCarrito(producto: any): void {
+    this.cartService.addToCart(producto);
+    producto.quantity = 1;
+    producto.agregado = true;
+
+    setTimeout(() => {
+      producto.agregado = false;
+    }, 1000);
+  }  
+  /*
+  addToCart(product: any): void {
+    const producto = this.productos[this.currentSlide];
     this.cartService.addToCart({ ...producto });
 
     this.agregado = true;
-    producto.quantity = 1;
+    producto.cantidad = 1;
 
     setTimeout(() => {
       this.agregado = false;
     }, 1000);
   }
- 
+  
   getCartTotal(): number {
     return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }
@@ -85,6 +93,6 @@ export class ProductListComponent implements OnInit {
   
   vaciarCarrito() {
     this.cart = [];
-  }
-    */
+  }*/
+    
 }

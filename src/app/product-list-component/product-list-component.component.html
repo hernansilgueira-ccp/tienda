@@ -11,7 +11,7 @@
   </ngb-carousel>
 -->
     <ngb-carousel *ngIf="productosAgrupados.length > 0">
-      <ng-template ngbSlide *ngFor="let grupo of productosAgrupados">
+      <ng-template ngbSlide *ngFor="let grupo of productosAgrupados let i= index">
         <div class="row">
           <div class="col-md-3" *ngFor="let producto of grupo">
             <div class="card mb-3">
@@ -21,7 +21,29 @@
                 <p class="card-text">{{ producto.descripcion }}</p>
                 <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
               </div>
+              
+              <div class="d-flex justify-content-center align-items-center mb-2">
+                <button class="btn btn-outline-secondary btn-sm" (click)="decrementQuantity(producto)">-</button>
+          
+                <span class="mx-1" style="min-width: 30px; text-align: center;">
+                  {{producto.quantity}}
+                </span>
+          
+                <button class="btn btn-outline-secondary btn-sm" (click)="incrementQuantity(producto)">+</button>
+              </div>
+              <div class="text-center mb-2">
+                <button
+                class="btn"
+                [ngClass]="producto.agregado ? 'btn-success' : 'btn-primary'"
+                [disabled]="producto.agregado"
+                (click)="agregarAlCarrito(producto)"
+              >
+                {{ producto.agregado ? '✅ Agregado' : 'Agregar al carrito' }}
+              </button>
             </div>
+            </div>  
+              
+            
           </div>
         </div>
       </ng-template>
