@@ -1,59 +1,45 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { CartItems } from '../../models/cart-item.model';
+import { CartItem } from '../../models/cart-item.model';
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule,MatCardModule,MatListModule,MatIconModule],
-  templateUrl: './cart.component.html',
+  imports: [CommonModule, MatCardModule, MatListModule, MatIconModule, MatButtonModule],
+  templateUrl: './cart.component.html', 
   styleUrls: ['./cart.component.css']
-
 })
-
 export class CartComponent implements OnInit {
-  cartItem: CartItems[] = [];
-
-  
+  cartItems: CartItem[] = [];
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.cartItem = this.cartService.getCartItems();
-  }
-  
-  toggleCart(): void {
-    // Lógica para mostrar u ocultar el carrito
-  }
-  removeItem(index: number) {
-    this.cartService.removeFromCart(index);
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de eliminar
+    this.cartItems = this.cartService.getCartItems();
   }
 
-  increaseQuantity(index: number) {
-    this.cartService.increaseQuantity(index);
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de incrementar
+  removeItem(i: number) {
+    this.cartService.removeFromCart(i);
+    this.cartItems = this.cartService.getCartItems();
   }
-
-  decreaseQuantity(index: number) {
-    this.cartService.decreaseQuantity(index);
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de decrementar
+  increaseQuantity(i: number) {
+    this.cartService.increaseQuantity(i);
+    this.cartItems = this.cartService.getCartItems();
   }
-
-  getTotal() {
-    return this.cartService.getTotalPrice();
+  decreaseQuantity(i: number) {
+    this.cartService.decreaseQuantity(i);
+    this.cartItems = this.cartService.getCartItems();
   }
-
   clearCart() {
     this.cartService.clearCart();
-    this.cartItem = this.cartService.getCartItems(); // Actualiza la lista después de vaciar
+    this.cartItems = this.cartService.getCartItems();
   }
-
-  //@ViewChild(CartComponent) cartComponent: CartComponent = {} as CartComponent;
-
+  getTotal(): number {
+    return this.cartService.getTotalPrice();
+  }
 }

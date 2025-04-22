@@ -1,13 +1,14 @@
+<!-- src/app/product-list-component/product-list-component.component.html -->
 <div class="product-list">
-  <div *ngFor="let p of products" class="product-card">
-    <img [src]="p.imageUrl" alt="{{p.name}}" class="product-image" />
-    <h4>{{ p.name }}</h4>
-    <p>Precio: ${{ p.price }}</p>
+  <div *ngFor="let p of productos" class="product-card">
+    <img [src]="p.imagenUrl" alt="{{p.nombre}}" class="product-image" />
+    <h4>{{ p.nombre }}</h4>
+    <p>Precio: ${{ p.precio }}</p>
     <button mat-raised-button color="primary" (click)="addToCart(p)">
       Agregar al carrito
     </button>
-    <span *ngIf="getQuantity(p.id) > 0" class="qty-badge">
-      En carrito: {{ getQuantity(p.id) }}
+    <span *ngIf="getQuantity(p.id.toString()) > 0" class="qty-badge">
+      En carrito: {{ getQuantity(p.id.toString()) }}
     </span>
   </div>
 </div>

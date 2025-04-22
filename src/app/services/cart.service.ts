@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl?: string;
-  quantity: number;
-}
+import { CartItem } from '../models/cart-item.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {

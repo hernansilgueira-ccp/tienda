@@ -3,12 +3,12 @@
     <mat-card-title>🛒 Carrito de Compras</mat-card-title>
   </mat-card-header>
 
-  <mat-card-content *ngIf="cartItem.length === 0">
+  <mat-card-content *ngIf="cartItems.length === 0">
     <p>El carrito está vacío.</p>
   </mat-card-content>
 
-  <mat-list *ngIf="cartItem.length > 0">
-    <mat-list-item *ngFor="let item of cartItem; let i = index">
+  <mat-list *ngIf="cartItems.length > 0">
+    <mat-list-item *ngFor="let item of cartItems; let i = index">
       <div class="item-details">
         <img [src]="item.imageUrl" alt="{{ item.name }}" class="item-image" />
         <div class="item-info">
@@ -32,7 +32,7 @@
     </mat-list-item>
   </mat-list>
 
-  <mat-card-actions *ngIf="cartItem.length > 0">
+  <mat-card-actions *ngIf="cartItems.length > 0">
     <div class="total">
       <p><strong>Total:</strong> ${{ getTotal() }}</p>
     </div>

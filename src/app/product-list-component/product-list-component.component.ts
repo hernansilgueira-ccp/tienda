@@ -1,34 +1,35 @@
+// src/app/product-list-component/product-list-component.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 import { CartService } from '../services/cart.service';
 import { ProductoService } from '../services/product.service';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, ProductoService],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.css']
 })
-export class ProductListComponent implements OnInit {
-  products = [];
+export class ProductListComponentComponent implements OnInit {
+  productos: any[] = [];
 
   constructor(
-    private productService: ProductoService,
+    private productoService: ProductoService,
     private cartService: CartService
   ) {}
 
   ngOnInit() {
-    this.productService.getProductos().subscribe(list => this.products = list);
+    this.productoService.getProductos().subscribe(list => this.productos = list);
   }
 
-  addToCart(product: any) {
+  addToCart(producto: any) {
     this.cartService.addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      imageUrl: product.imageUrl,
+      id: producto.id.toString(),       // asegurar string
+      name: producto.nombre,
+      price: producto.precio,
+      imageUrl: producto.imagenUrl,
       quantity: 1
     });
   }

@@ -1,8 +1,7 @@
-export interface CartItems {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    imageUrl?: string;
-  }
-  
+export interface CartItem {
+  id: string;           // string para coincidir con la sesión
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl?: string;
+}
