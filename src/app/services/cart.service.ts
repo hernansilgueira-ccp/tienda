@@ -1,22 +1,14 @@
-// src/app/services/cart.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl?: string;
-  quantity: number;
-}
+import { CartItem } from '../models/cart-item.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly storageKey = 'cartItems';
-  private itemsSubject = new BehaviorSubject<CartItem[]>(this.load());
-  cartItems$ = this.itemsSubject.asObservable();
+  private items$ = new BehaviorSubject<CartItem[]>(this.loadFromStorage());
+  public cartItems$ = this.items$.asObservable();
 
-  private load(): CartItem[] {
+  private loadFromStorage(): CartItem[] {
     try {
       const json = sessionStorage.getItem(this.storageKey);
       return json ? JSON.parse(json) : [];
@@ -25,38 +17,49 @@ export class CartService {
     }
   }
 
-  private persist() {
-    const items = this.itemsSubject.value;
+  private saveAndPublish() {
+    const items = this.items$.value;
     try {
       sessionStorage.setItem(this.storageKey, JSON.stringify(items));
     } catch {}
-    this.itemsSubject.next([...items]);
+    this.items$.next([...items]);
   }
 
   getCartItems(): CartItem[] {
-    return this.itemsSubject.value;
+    return this.items$.value;
   }
 
-  addToCart(item: CartItem) {
-    const items = this.itemsSubject.value;
+  addToCart(item: CartItem): void {
+    const items = this.items$.value;
     const idx = items.findIndex(i => i.id === item.id);
-    if (idx > -1) {
-      items[idx].quantity += item.quantity;
-    } else {
-      items.push({ ...item });
-    }
-    this.persist();
+    if (idx > -1) items[idx].quantity += item.quantity;
+    else items.push({ ...item });
+    this.saveAndPublish();
   }
 
-  removeFromCart(i: number) { this.itemsSubject.value.splice(i,1); this.persist(); }
-  increaseQuantity(i: number) { this.itemsSubject.value[i].quantity++; this.persist(); }
-  decreaseQuantity(i: number) {
-    const v = this.itemsSubject.value;
-    if (v[i].quantity>1) v[i].quantity--; 
-    this.persist();
+  removeFromCart(i: number): void {
+    const items = this.items$.value;
+    items.splice(i, 1);
+    this.saveAndPublish();
   }
-  clearCart() { sessionStorage.removeItem(this.storageKey); this.itemsSubject.next([]); }
+
+  increaseQuantity(i: number): void {
+    this.items$.value[i].quantity++;
+    this.saveAndPublish();
+  }
+
+  decreaseQuantity(i: number): void {
+    const items = this.items$.value;
+    if (items[i].quantity > 1) items[i].quantity--;
+    this.saveAndPublish();
+  }
+
+  clearCart(): void {
+    sessionStorage.removeItem(this.storageKey);
+    this.items$.next([]);
+  }
+
   getTotalPrice(): number {
-    return this.itemsSubject.value.reduce((sum, it) => sum + it.price * it.quantity, 0);
+    return this.items$.value.reduce((sum, it) => sum + it.price * it.quantity, 0);
   }
 }

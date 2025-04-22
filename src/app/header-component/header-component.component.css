@@ -1,21 +1,19 @@
-/* src/app/header-component/header-component.component.css */
 .cart-sidebar {
-  position: fixed; top: 0; right: -360px;
-  width: 360px; height: 100%; background: #fff;
-  box-shadow: -4px 0 12px rgba(0,0,0,0.2);
-  transition: right .3s ease-in-out; z-index: 2000;
-  overflow: hidden;
+  position: fixed; top:0; right:-360px;
+  width:360px; height:100%; background:#fff;
+  box-shadow:-4px 0 12px rgba(0,0,0,0.2);
+  transition:right .3s ease-in-out; z-index:2000;
+  overflow:hidden;
 }
-.cart-sidebar.open { right: 0; }
-
+.cart-sidebar.open { right:0; }
 .cart-container {
-  position: relative; height: 100%; overflow-y: auto;
+  position:relative; height:100%; overflow-y:auto;
 }
 .cart-content {
-  padding: 48px 16px 16px;
+  padding:48px 16px 16px;
 }
 .cart-close {
-  position: absolute; top: 12px; right: 12px;
-  background: transparent; border: none;
-  font-size: 2rem; color: #333; cursor: pointer; z-index: 2100;
+  position:absolute; top:12px; right:12px;
+  background:transparent; border:none;
+  font-size:2rem; color:#333; cursor:pointer; z-index:2100;
 }

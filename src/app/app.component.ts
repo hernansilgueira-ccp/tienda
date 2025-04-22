@@ -1,10 +1,10 @@
 // src/app/app.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponentComponent } from './header-component/header-component.component';
-import { MainComponentComponent } from './main-component/main-component.component';
-import { ProductListComponentComponent } from './product-list-component/product-list-component.component';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponentComponent } from './header-component/header-component.component';
+import { ProductListComponent } from './product-list-component/product-list-component.component';
+import { MainComponentComponent } from './main-component/main-component.component';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +12,8 @@ import { RouterOutlet } from '@angular/router';
   imports: [
     CommonModule,
     HeaderComponentComponent,
+    ProductListComponent,
     MainComponentComponent,
-    ProductListComponentComponent,
     RouterOutlet
   ],
   templateUrl: './app.component.html',

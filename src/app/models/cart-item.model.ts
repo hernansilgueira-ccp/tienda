@@ -1,7 +1,7 @@
 export interface CartItem {
-  id: string;           // string para coincidir con la sesión
+  id: string;
   name: string;
   price: number;
-  quantity: number;
   imageUrl?: string;
+  quantity: number;
 }

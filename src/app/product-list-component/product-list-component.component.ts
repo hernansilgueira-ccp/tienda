@@ -1,4 +1,3 @@
-// src/app/product-list-component/product-list-component.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +11,7 @@ import { ProductoService, Producto } from '../services/product.service';
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.css']
 })
-export class ProductListComponentComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   productos: Producto[] = [];
 
   constructor(
@@ -24,18 +23,18 @@ export class ProductListComponentComponent implements OnInit {
     this.productoService.getProductos().subscribe(list => this.productos = list);
   }
 
-  addToCart(producto: Producto) {
+  addToCart(p: Producto) {
     this.cartService.addToCart({
-      id: producto.id!.toString(),
-      name: producto.nombre,
-      price: producto.precio,
-      imageUrl: producto.imagen,
+      id: p.id!.toString(),
+      name: p.nombre,
+      price: p.precio,
+      imageUrl: p.imagen,
       quantity: 1
     });
   }
 
-  getQuantity(productId: string): number {
-    const item = this.cartService.getCartItems().find(i => i.id === productId);
-    return item ? item.quantity : 0;
+  getQuantity(id: string): number {
+    const found = this.cartService.getCartItems().find(i => i.id === id);
+    return found ? found.quantity : 0;
   }
 }
