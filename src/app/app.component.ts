@@ -14,7 +14,7 @@ import { ProductoService, Producto } from './services/product.service';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, NgbCarouselModule, HeaderComponentComponent,MainComponentComponent,MatIconModule],
+  imports: [RouterOutlet, CommonModule, NgbCarouselModule, HeaderComponentComponent,MainComponentComponent,MatIconModule,ProductListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

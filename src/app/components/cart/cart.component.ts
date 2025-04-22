@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule,MatCardModule,MatListModule,MatIconModule],
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.css']
 
 })
 
@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.cartItem = this.cartService.();
+    this.cartItem = this.cartService.getCartItems();
   }
   
   toggleCart(): void {
