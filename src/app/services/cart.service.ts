@@ -13,12 +13,10 @@ export interface CartItem {
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly storageKey = 'cartItems';
-
-  // BehaviorSubject emits current cart contents
-  private itemsSubject = new BehaviorSubject<CartItem[]>(this.loadCart());
+  private itemsSubject = new BehaviorSubject<CartItem[]>(this.load());
   cartItems$ = this.itemsSubject.asObservable();
 
-  private loadCart(): CartItem[] {
+  private load(): CartItem[] {
     try {
       const json = sessionStorage.getItem(this.storageKey);
       return json ? JSON.parse(json) : [];
@@ -27,22 +25,19 @@ export class CartService {
     }
   }
 
-  private saveAndEmit() {
+  private persist() {
+    const items = this.itemsSubject.value;
     try {
-      sessionStorage.setItem(
-        this.storageKey,
-        JSON.stringify(this.itemsSubject.value)
-      );
+      sessionStorage.setItem(this.storageKey, JSON.stringify(items));
     } catch {}
-    // emit a new array copy so subscribers update
-    this.itemsSubject.next([...this.itemsSubject.value]);
+    this.itemsSubject.next([...items]);
   }
 
   getCartItems(): CartItem[] {
     return this.itemsSubject.value;
   }
 
-  addToCart(item: CartItem): void {
+  addToCart(item: CartItem) {
     const items = this.itemsSubject.value;
     const idx = items.findIndex(i => i.id === item.id);
     if (idx > -1) {
@@ -50,38 +45,18 @@ export class CartService {
     } else {
       items.push({ ...item });
     }
-    this.saveAndEmit();
+    this.persist();
   }
 
-  removeFromCart(index: number): void {
-    const items = this.itemsSubject.value;
-    items.splice(index, 1);
-    this.saveAndEmit();
+  removeFromCart(i: number) { this.itemsSubject.value.splice(i,1); this.persist(); }
+  increaseQuantity(i: number) { this.itemsSubject.value[i].quantity++; this.persist(); }
+  decreaseQuantity(i: number) {
+    const v = this.itemsSubject.value;
+    if (v[i].quantity>1) v[i].quantity--; 
+    this.persist();
   }
-
-  increaseQuantity(index: number): void {
-    const items = this.itemsSubject.value;
-    items[index].quantity++;
-    this.saveAndEmit();
-  }
-
-  decreaseQuantity(index: number): void {
-    const items = this.itemsSubject.value;
-    if (items[index].quantity > 1) {
-      items[index].quantity--;
-      this.saveAndEmit();
-    }
-  }
-
-  clearCart(): void {
-    sessionStorage.removeItem(this.storageKey);
-    this.itemsSubject.next([]);
-  }
-
+  clearCart() { sessionStorage.removeItem(this.storageKey); this.itemsSubject.next([]); }
   getTotalPrice(): number {
-    return this.itemsSubject.value.reduce(
-      (sum, it) => sum + it.price * it.quantity,
-      0
-    );
+    return this.itemsSubject.value.reduce((sum, it) => sum + it.price * it.quantity, 0);
   }
 }
