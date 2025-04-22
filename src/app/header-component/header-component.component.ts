@@ -8,8 +8,7 @@ import { CartComponent } from '../components/cart/cart.component';
   selector: 'app-header-component',
   imports: [
     CommonModule,
-    MatIconModule,
-    CartComponent
+    MatIconModule
   ],
   templateUrl: './header-component.component.html',
   styleUrls: ['./header-component.component.css']

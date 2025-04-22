@@ -1,5 +1,4 @@
-// src/app/models/cart-item.model.ts
-export interface CartItem {
+export interface CartItems {
     id: number;
     name: string;
     price: number;

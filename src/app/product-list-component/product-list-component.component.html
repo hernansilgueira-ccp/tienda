@@ -1,38 +1,13 @@
-<div class="container mt-4">
-  <!-- <ngb-carousel  [interval]="5000"
-  [pauseOnHover]="true"
-  (slide)="onSlideChange($event)"
-  *ngIf="products && products.length">
-    <ng-template ngbSlide *ngFor="let product of products; let i = index">
-      <div class="picsum-img-wrapper text-center">
-        <img [src]="product.image" [alt]="product.name" class="img-fluid rounded">
-      </div>
-    </ng-template>
-  </ngb-carousel>
--->
-    <ngb-carousel *ngIf="productosAgrupados.length > 0">
-      <ng-template ngbSlide *ngFor="let grupo of productosAgrupados">
-        <div class="row">
-          <div class="col-md-3" *ngFor="let producto of grupo">
-            <div class="card mb-3">
-              <img [src]="producto.imagen" class="card-img-top" [alt]="producto.nombre">
-              <div class="card-body">
-                <h5 class="card-title">{{ producto.nombre }}</h5>
-                <p class="card-text">{{ producto.descripcion }}</p>
-                <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-
-  <div class="container mt-5 text-center">
-      
+<div class="product-list">
+  <div *ngFor="let p of products" class="product-card">
+    <img [src]="p.imageUrl" alt="{{p.name}}" class="product-image" />
+    <h4>{{ p.name }}</h4>
+    <p>Precio: ${{ p.price }}</p>
+    <button mat-raised-button color="primary" (click)="addToCart(p)">
+      Agregar al carrito
+    </button>
+    <span *ngIf="getQuantity(p.id) > 0" class="qty-badge">
+      En carrito: {{ getQuantity(p.id) }}
+    </span>
   </div>
-  
-      
-        
-        
 </div>
-

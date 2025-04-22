@@ -1,90 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../services/cart.service';
-import { ProductoService, Producto } from '../services/product.service';
-//import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-
+import { ProductoService } from '../services/product.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, NgbCarouselModule ],
+  imports: [CommonModule, MatButtonModule, ProductoService],
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.css']
 })
 export class ProductListComponent implements OnInit {
-  productos: Producto[] = [];
-  productosAgrupados: Producto[][] = [];
+  products = [];
 
-  //@ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
+  constructor(
+    private productService: ProductoService,
+    private cartService: CartService
+  ) {}
 
-  constructor(private productoService: ProductoService, private cartService: CartService) {}
+  ngOnInit() {
+    this.productService.getProductos().subscribe(list => this.products = list);
+  }
 
-  ngOnInit(): void {
-    this.productoService.getProductos().subscribe((data: Producto[]) => {
-      this.productos = data;
-      this.productosAgrupados = this.agruparProductos(this.productos, 4);
+  addToCart(product: any) {
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      quantity: 1
     });
   }
-  agruparProductos(lista: Producto[], tamañoGrupo: number): Producto[][] {
-    const grupos: Producto[][] = [];
-    for (let i = 0; i < lista.length; i += tamañoGrupo) {
-      grupos.push(lista.slice(i, i + tamañoGrupo));
-    }
-    return grupos;
-  }
-  currentSlide = 0;
-  agregado: boolean = false;
-  //cart: any[] = [];
 
-
-  onSlideChange(event: any) {
-    const slideId = parseInt(event.current.replace('ngb-slide-', ''), 10);
-    this.currentSlide = isNaN(slideId) ? 0 : slideId;
+  getQuantity(productId: string): number {
+    const item = this.cartService.getCartItems().find(i => i.id === productId);
+    return item ? item.quantity : 0;
   }
-  
-  agregarAlCarrito(producto: any): void {
-    this.cartService.addToCart(producto);
-  }
-  
-   /*
-  
-  incrementQuantity(index: number) {
-    this.products[index].quantity++;
-  }
-  
-  decrementQuantity(index: number) {
-    if (this.products[index].quantity > 1) {
-      this.products[index].quantity--;
-    }
-  }
-  addToCart(product: any) {
-    const producto = this.products[this.currentSlide];
-    this.cartService.addToCart({ ...producto });
-
-    this.agregado = true;
-    producto.quantity = 1;
-
-    setTimeout(() => {
-      this.agregado = false;
-    }, 1000);
-  }
- 
-  getCartTotal(): number {
-    return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  }
-  mostrarCarrito: boolean = false;
-
-  toggleCarrito() {
-    this.mostrarCarrito = !this.mostrarCarrito;
-  }
-  eliminarDelCarrito(productId: number) {
-    this.cart = this.cart.filter(item => item.id !== productId);
-  }
-  
-  vaciarCarrito() {
-    this.cart = [];
-  }
-    */
 }

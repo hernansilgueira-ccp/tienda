@@ -19,7 +19,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Buscador + Menú -->
+    <!-- Buscador + menú -->
     <div class="collapse navbar-collapse" id="headerNavbar">
       <form class="d-flex mx-auto">
         <input class="form-control me-2"
@@ -34,18 +34,20 @@
         <li class="nav-item"><a class="nav-link" href="index.html">Contacto</a></li>
         <li class="nav-item"><a class="nav-link" href="index.html">Ayuda</a></li>
       </ul>
-    </div>
+
+    <!-- ÚNICO botón de carrito -->
+    <button mat-flat-button color="accent" (click)="toggleCart()">
+      <mat-icon>shopping_cart</mat-icon> Ver carrito
+    </button>
+  </div>
   </div>
 </nav>
 
-    <!-- ÚNICO botón de carrito en el header 
-    <button mat-flat-button color="accent" (click)="toggleCart()">
-      <mat-icon>shopping_cart</mat-icon>
-      Ver carrito
-    </button>
-    -->
 <aside class="cart-sidebar" [class.open]="isCartOpen">
-  <!-- Botón para cerrar -->
-  <button class="cart-close" (click)="closeCart()">×</button>
-  <app-cart></app-cart>
+  <div class="cart-container">
+    <button class="cart-close" (click)="closeCart()">×</button>
+    <div class="cart-content">
+      <app-cart></app-cart>
+    </div>
+  </div>
 </aside>
