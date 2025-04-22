@@ -1,74 +1,87 @@
 // src/app/services/cart.service.ts
 import { Injectable } from '@angular/core';
-import { CartItem } from '../models/cart-item.model';
+import { BehaviorSubject } from 'rxjs';
+
+export interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl?: string;
+  quantity: number;
+}
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly storageKey = 'cartItems';
-  private cartItems: CartItem[] = [];
 
-  constructor() {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      this.cartItems = this.loadCart();
-    }
-  }
+  // BehaviorSubject emits current cart contents
+  private itemsSubject = new BehaviorSubject<CartItem[]>(this.loadCart());
+  cartItems$ = this.itemsSubject.asObservable();
 
   private loadCart(): CartItem[] {
     try {
-      const data = sessionStorage.getItem(this.storageKey);
-      return data ? JSON.parse(data) : [];
+      const json = sessionStorage.getItem(this.storageKey);
+      return json ? JSON.parse(json) : [];
     } catch {
       return [];
     }
   }
 
-  private saveCart(): void {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      try {
-        sessionStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
-      } catch {}
-    }
+  private saveAndEmit() {
+    try {
+      sessionStorage.setItem(
+        this.storageKey,
+        JSON.stringify(this.itemsSubject.value)
+      );
+    } catch {}
+    // emit a new array copy so subscribers update
+    this.itemsSubject.next([...this.itemsSubject.value]);
   }
 
   getCartItems(): CartItem[] {
-    return this.cartItems;
+    return this.itemsSubject.value;
   }
 
   addToCart(item: CartItem): void {
-    const existing = this.cartItems.find(i => i.id === item.id);
-    if (existing) {
-      existing.quantity += item.quantity;
+    const items = this.itemsSubject.value;
+    const idx = items.findIndex(i => i.id === item.id);
+    if (idx > -1) {
+      items[idx].quantity += item.quantity;
     } else {
-      this.cartItems.push({ ...item });
+      items.push({ ...item });
     }
-    this.saveCart();
+    this.saveAndEmit();
   }
 
   removeFromCart(index: number): void {
-    this.cartItems.splice(index, 1);
-    this.saveCart();
+    const items = this.itemsSubject.value;
+    items.splice(index, 1);
+    this.saveAndEmit();
   }
 
   increaseQuantity(index: number): void {
-    if (this.cartItems[index]) {
-      this.cartItems[index].quantity++;
-      this.saveCart();
-    }
+    const items = this.itemsSubject.value;
+    items[index].quantity++;
+    this.saveAndEmit();
   }
 
   decreaseQuantity(index: number): void {
-    if (this.cartItems[index] && this.cartItems[index].quantity > 1) {
-      this.cartItems[index].quantity--;
-      this.saveCart();
+    const items = this.itemsSubject.value;
+    if (items[index].quantity > 1) {
+      items[index].quantity--;
+      this.saveAndEmit();
     }
   }
 
   clearCart(): void {
-    this.cartItems = [];
-    this.saveCart();
+    sessionStorage.removeItem(this.storageKey);
+    this.itemsSubject.next([]);
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((sum, it) => sum + it.price * it.quantity, 0);
+    return this.itemsSubject.value.reduce(
+      (sum, it) => sum + it.price * it.quantity,
+      0
+    );
   }
 }

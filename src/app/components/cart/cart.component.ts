@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../services/cart.service';
-import { CartItem } from '../../models/cart-item.model';
+// src/app/components/cart/cart.component.ts
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CartService, CartItem } from '../../services/cart.service';
+import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -10,34 +11,44 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatListModule, MatIconModule, MatButtonModule],
-  templateUrl: './cart.component.html', 
-  styleUrls: ['./cart.component.css']
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule
+  ],
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   cartItems: CartItem[] = [];
+  private sub!: Subscription;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.cartItems = this.cartService.getCartItems();
+    // subscribe to updates
+    this.sub = this.cartService.cartItems$.subscribe(items => {
+      this.cartItems = items;
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   removeItem(i: number) {
     this.cartService.removeFromCart(i);
-    this.cartItems = this.cartService.getCartItems();
   }
   increaseQuantity(i: number) {
     this.cartService.increaseQuantity(i);
-    this.cartItems = this.cartService.getCartItems();
   }
   decreaseQuantity(i: number) {
     this.cartService.decreaseQuantity(i);
-    this.cartItems = this.cartService.getCartItems();
   }
   clearCart() {
     this.cartService.clearCart();
-    this.cartItems = this.cartService.getCartItems();
   }
   getTotal(): number {
     return this.cartService.getTotalPrice();
