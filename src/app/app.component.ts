@@ -1,48 +1,22 @@
-import { Component, ViewChild, OnInit  } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+// src/app/app.component.ts
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponentComponent } from "./header-component/header-component.component";
-import { MainComponentComponent } from "./main-component/main-component.component";
-import { CartComponent } from './components/cart/cart.component';
-import { MatIconModule } from '@angular/material/icon';
-import { ProductoService, Producto } from './services/product.service';
-
-
+import { HeaderComponentComponent } from './header-component/header-component.component';
+import { MainComponentComponent } from './main-component/main-component.component';
+import { ProductListComponentComponent } from './product-list-component/product-list-component.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, NgbCarouselModule, HeaderComponentComponent,
-  MainComponentComponent,MatIconModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    HeaderComponentComponent,
+    MainComponentComponent,
+    ProductListComponentComponent,
+    RouterOutlet
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  productos: Producto[] = [];
-  title = 'tienda';
-  constructor(private productoService: ProductoService) {}
-  ngOnInit(): void {
-    this.productoService.getProductos().subscribe(data => {
-      this.productos = data;
-    });
-  }
-  agregarProductoDemo() {
-    const nuevoProducto: Producto = {
-      nombre: 'Producto Demo',
-      precio: 9.99,
-      descripcion: 'Producto de prueba',
-      imagen: 'demo.jpg'
-    };
-
-    this.productoService.getProductos().subscribe(data => {
-      this.productos = data;
-    });
-  }
-  
-  @ViewChild(CartComponent) cartComponent: CartComponent = {} as CartComponent;
-
-  toggleCart(): void {
-    this.cartComponent.toggleCart();
-  }
-}
+export class AppComponent {}

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CartService } from '../services/cart.service';
-import { ProductoService } from '../services/product.service';
+import { ProductoService, Producto } from '../services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +13,7 @@ import { ProductoService } from '../services/product.service';
   styleUrls: ['./product-list-component.component.css']
 })
 export class ProductListComponentComponent implements OnInit {
-  productos: any[] = [];
+  productos: Producto[] = [];
 
   constructor(
     private productoService: ProductoService,
@@ -24,12 +24,12 @@ export class ProductListComponentComponent implements OnInit {
     this.productoService.getProductos().subscribe(list => this.productos = list);
   }
 
-  addToCart(producto: any) {
+  addToCart(producto: Producto) {
     this.cartService.addToCart({
-      id: producto.id.toString(),       // asegurar string
+      id: producto.id!.toString(),
       name: producto.nombre,
       price: producto.precio,
-      imageUrl: producto.imagenUrl,
+      imageUrl: producto.imagen,
       quantity: 1
     });
   }

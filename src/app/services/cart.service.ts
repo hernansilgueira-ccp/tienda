@@ -1,18 +1,33 @@
+// src/app/services/cart.service.ts
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart-item.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private readonly storageKey = 'cartItems';
-  private cartItems: CartItem[] = this.loadCart();
+  private cartItems: CartItem[] = [];
+
+  constructor() {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      this.cartItems = this.loadCart();
+    }
+  }
 
   private loadCart(): CartItem[] {
-    const data = sessionStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : [];
+    try {
+      const data = sessionStorage.getItem(this.storageKey);
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
   }
 
   private saveCart(): void {
-    sessionStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      try {
+        sessionStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
+      } catch {}
+    }
   }
 
   getCartItems(): CartItem[] {
@@ -35,12 +50,14 @@ export class CartService {
   }
 
   increaseQuantity(index: number): void {
-    this.cartItems[index].quantity++;
-    this.saveCart();
+    if (this.cartItems[index]) {
+      this.cartItems[index].quantity++;
+      this.saveCart();
+    }
   }
 
   decreaseQuantity(index: number): void {
-    if (this.cartItems[index].quantity > 1) {
+    if (this.cartItems[index] && this.cartItems[index].quantity > 1) {
       this.cartItems[index].quantity--;
       this.saveCart();
     }
