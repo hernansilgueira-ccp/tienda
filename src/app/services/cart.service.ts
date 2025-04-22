@@ -12,6 +12,7 @@ export class CartService {
   }
 
   addToCart(item: CartItem) {
+    
     this.cartItems.push(item);
   }
 

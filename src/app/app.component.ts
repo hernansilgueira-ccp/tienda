@@ -33,7 +33,9 @@ export class AppComponent implements OnInit {
       nombre: 'Producto Demo',
       precio: 9.99,
       descripcion: 'Producto de prueba',
-      imagen: 'demo.jpg'
+      imagen: 'demo.jpg',
+      quantity: 1,
+      agregado: false
     };
 
     this.productoService.getProductos().subscribe(data => {
