@@ -1,7 +1,9 @@
+<!-- src/app/header-component/header-component.component.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
+
     <!-- Logo -->
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="#">
       <img
         src="assets/images/logo033_mini.png"
         alt="Logo de Tienda"
@@ -10,7 +12,7 @@
       />
     </a>
 
-    <!-- Toggle móvil -->
+    <!-- Botón toggle para móvil -->
     <button
       class="navbar-toggler"
       type="button"
@@ -25,7 +27,7 @@
 
     <!-- Contenido colapsable: buscador, menú y carrito -->
     <div class="collapse navbar-collapse" id="headerNavbar">
-      <!-- Buscador -->
+      <!-- Formulario de búsqueda -->
       <form class="d-flex mx-auto">
         <input
           class="form-control me-2"
@@ -36,12 +38,12 @@
         <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
 
-      <!-- Links de navegación -->
+      <!-- Enlaces de navegación -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html">Productos</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html">Contacto</a></li>
-        <li class="nav-item"><a class="nav-link" href="index.html">Ayuda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Ayuda</a></li>
       </ul>
 
       <!-- ÚNICO botón de carrito -->
@@ -56,11 +58,11 @@
 <!-- Sidebar del carrito -->
 <aside class="cart-sidebar" [class.open]="isCartOpen">
   <div class="cart-container">
-    <!-- Botón de cierre -->
+    <!-- Botón para cerrar -->
     <button class="cart-close" (click)="closeCart()">×</button>
-    <!-- Contenido scrollable -->
+    <!-- Aquí se monta el componente Cart -->
     <div class="cart-content">
-      <app-cart *ngIf="isCartOpen"></app-cart>
+      <app-cart></app-cart>
     </div>
   </div>
 </aside>

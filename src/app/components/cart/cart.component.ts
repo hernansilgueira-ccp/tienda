@@ -1,8 +1,8 @@
 // src/app/components/cart/cart.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CartService, CartItem } from '../../services/cart.service';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
