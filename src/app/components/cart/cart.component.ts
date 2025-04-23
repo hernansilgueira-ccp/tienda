@@ -1,8 +1,9 @@
+// frontend/src/app/components/cart/cart.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cart-item.model';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,10 +41,10 @@ export class CartComponent implements OnInit, OnDestroy {
   removeItem(i: number) {
     this.cartService.removeFromCart(i);
   }
-  increaseQuantity(i: number) {
+  increase(i: number) {
     this.cartService.increaseQuantity(i);
   }
-  decreaseQuantity(i: number) {
+  decrease(i: number) {
     this.cartService.decreaseQuantity(i);
   }
   clearCart() {

@@ -1,27 +1,17 @@
+<!-- frontend/src/app/header-component/header-component.component.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <!-- Logo -->
     <a class="navbar-brand" href="#">
-      <img src="assets/images/logo033_mini.png"
-           alt="Logo de Tienda"
-           class="img-fluid"
-           style="max-height: 80px;" />
+      <img src="assets/images/logo033_mini.png" alt="Logo" style="max-height:80px;">
     </a>
-    <!-- Toggle móvil -->
     <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse" data-bs-target="#headerNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Menú colapsable -->
     <div class="collapse navbar-collapse" id="headerNavbar">
       <form class="d-flex mx-auto">
-        <input class="form-control me-2"
-               type="search"
-               placeholder="Buscar"
-               aria-label="Buscar" />
-        <button class="btn btn-outline-success" type="submit">
-          Buscar
-        </button>
+        <input class="form-control me-2" type="search" placeholder="Buscar">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
@@ -29,10 +19,8 @@
         <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Ayuda</a></li>
       </ul>
-      <!-- ÚNICO botón de carrito -->
       <button mat-flat-button color="accent" (click)="toggleCart()">
-        <mat-icon>shopping_cart</mat-icon>
-        Ver carrito
+        <mat-icon>shopping_cart</mat-icon> Ver carrito
       </button>
     </div>
   </div>
@@ -40,9 +28,7 @@
 
 <aside class="cart-sidebar" [class.open]="isCartOpen">
   <div class="cart-container">
-    <!-- Botón Cerrar -->
     <button class="cart-close" (click)="closeCart()">×</button>
-    <!-- Mount CartComponent -->
     <div class="cart-content">
       <app-cart></app-cart>
     </div>

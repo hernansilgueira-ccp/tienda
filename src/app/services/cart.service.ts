@@ -1,28 +1,29 @@
+// frontend/src/app/services/cart.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private readonly storageKey = 'cartItems';
-  private items$ = new BehaviorSubject<CartItem[]>(this.loadFromStorage());
+  private readonly STORAGE_KEY = 'cartItems';
+  private items$ = new BehaviorSubject<CartItem[]>(this.load());
   public cartItems$ = this.items$.asObservable();
 
-  private loadFromStorage(): CartItem[] {
+  private load(): CartItem[] {
     try {
-      const json = sessionStorage.getItem(this.storageKey);
+      const json = sessionStorage.getItem(this.STORAGE_KEY);
       return json ? JSON.parse(json) : [];
     } catch {
       return [];
     }
   }
 
-  private saveAndPublish() {
-    const items = this.items$.value;
+  private saveAndEmit() {
+    const list = this.items$.value;
     try {
-      sessionStorage.setItem(this.storageKey, JSON.stringify(items));
+      sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(list));
     } catch {}
-    this.items$.next([...items]);
+    this.items$.next([...list]);
   }
 
   getCartItems(): CartItem[] {
@@ -30,32 +31,37 @@ export class CartService {
   }
 
   addToCart(item: CartItem): void {
-    const items = this.items$.value;
-    const idx = items.findIndex(i => i.id === item.id);
-    if (idx > -1) items[idx].quantity += item.quantity;
-    else items.push({ ...item });
-    this.saveAndPublish();
+    const list = this.items$.value;
+    const idx = list.findIndex(i => i.id === item.id);
+    if (idx > -1) {
+      list[idx].quantity += item.quantity;
+    } else {
+      list.push({ ...item });
+    }
+    this.saveAndEmit();
   }
 
   removeFromCart(i: number): void {
-    const items = this.items$.value;
-    items.splice(i, 1);
-    this.saveAndPublish();
+    const list = this.items$.value;
+    list.splice(i, 1);
+    this.saveAndEmit();
   }
 
   increaseQuantity(i: number): void {
     this.items$.value[i].quantity++;
-    this.saveAndPublish();
+    this.saveAndEmit();
   }
 
   decreaseQuantity(i: number): void {
-    const items = this.items$.value;
-    if (items[i].quantity > 1) items[i].quantity--;
-    this.saveAndPublish();
+    const list = this.items$.value;
+    if (list[i].quantity > 1) {
+      list[i].quantity--;
+      this.saveAndEmit();
+    }
   }
 
   clearCart(): void {
-    sessionStorage.removeItem(this.storageKey);
+    sessionStorage.removeItem(this.STORAGE_KEY);
     this.items$.next([]);
   }
 
