@@ -1,59 +1,37 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { CartItem } from '../models/cart-item.model';
+import { CartItem } from '../models/cart-item.model';  // interfaz del item en carrito
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class CartService {
-  private readonly STORAGE_KEY = 'cartItems';
-  private items$ = new BehaviorSubject<CartItem[]>(this.load());
-  public cartItems$ = this.items$.asObservable();
+  private items: CartItem[] = [];  // Items actuales en el carrito
 
-  private load(): CartItem[] {
-    try {
-      const json = sessionStorage.getItem(this.STORAGE_KEY);
-      return json ? JSON.parse(json) : [];
-    } catch {
-      return [];
+  getItems(): CartItem[] {
+    return this.items;
+  }
+
+  addToCart(product: any): void {
+    const existingItem = this.items.find(item => item.id === product.id);
+    if (existingItem) {
+      // Si el producto ya está en el carrito, incrementar su cantidad
+      existingItem.quantity += product.quantity;
+    } else {
+      // Si no está, crear un nuevo CartItem a partir del producto
+      const newItem: CartItem = {
+        id: product.id,
+        name: product.nombre || product.name,      // tomar el campo disponible
+        price: product.precio || product.price,
+        imageUrl: product.imageUrl,
+        quantity: product.quantity
+      };
+      this.items.push(newItem);
     }
   }
 
-  private saveAndEmit() {
-    const list = this.items$.value;
-    try { sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(list)); } catch {}
-    this.items$.next([...list]);
-  }
-
-  getCartItems(): CartItem[] {
-    return this.items$.value;
-  }
-
-  addToCart(item: CartItem): void {
-    const list = this.items$.value;
-    const idx = list.findIndex(i => i.id === item.id);
-    if (idx > -1) list[idx].quantity += item.quantity;
-    else list.push({ ...item });
-    this.saveAndEmit();
-  }
-
-  removeFromCart(i: number): void {
-    const list = this.items$.value; list.splice(i, 1); this.saveAndEmit();
-  }
-
-  increaseQuantity(i: number): void {
-    this.items$.value[i].quantity++; this.saveAndEmit();
-  }
-
-  decreaseQuantity(i: number): void {
-    const list = this.items$.value;
-    if (list[i].quantity > 1) { list[i].quantity--; this.saveAndEmit(); }
-  }
-
   clearCart(): void {
-    sessionStorage.removeItem(this.STORAGE_KEY);
-    this.items$.next([]);
+    this.items = [];
   }
 
-  getTotalPrice(): number {
-    return this.items$.value.reduce((sum, it) => sum + it.price * it.quantity, 0);
-  }
+  // (Opcionalmente, métodos para remover un item o ajustar cantidad podrían implementarse aquí)
 }

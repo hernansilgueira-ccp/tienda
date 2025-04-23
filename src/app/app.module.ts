@@ -1,31 +1,26 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
-import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list-component/product-list-component.component';
 import { CartComponent } from './components/cart/cart.component';
-
-const routes: Routes = [
-  { path: '', component: ProductListComponent },
-  { path: 'carrito', component: CartComponent },
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-=======
+// Importar módulos de Angular Material necesarios:
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
-    // otros componentes
+    AppComponent,
+    ProductListComponent,
+    CartComponent,
+    // ... otros componentes ...
   ],
   imports: [
-    // otros módulos
+    BrowserModule,
+    // ... otros módulos como FormsModule/HttpClientModule si se usan ...
     MatIconModule,
     MatButtonModule
   ],
-  // ...
->>>>>>> remotes/origin/Largo
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppRoutingModule {}
+export class AppModule { }

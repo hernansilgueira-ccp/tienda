@@ -8,6 +8,7 @@ export interface Producto {
   precio: number;
   descripcion: string;
   imagen: string;
+  cantidadSeleccionada: number;
 }
 /*
 @Injectable({

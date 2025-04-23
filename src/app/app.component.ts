@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponentComponent } from './header-component/header-component.component';
-import { ProductListComponentComponent } from './product-list-component/product-list-component.component';
+import { ProductListComponent } from './product-list-component/product-list-component.component';
 import { RouterOutlet } from '@angular/router';
 import { MainComponentComponent } from './main-component/main-component.component';
 
@@ -11,7 +11,7 @@ import { MainComponentComponent } from './main-component/main-component.componen
   imports: [
     CommonModule,
     HeaderComponentComponent,
-    ProductListComponentComponent,
+    ProductListComponent,
     MainComponentComponent,
     RouterOutlet
   ],
