@@ -3,8 +3,7 @@
     <a class="navbar-brand" href="#">
       <img
         src="assets/images/logo033_mini.png"
-        alt="Logo de Tienda"
-        class="img-fluid"
+        alt="Logo"
         style="max-height:80px;"
       />
     </a>
@@ -28,29 +27,29 @@
           placeholder="Buscar"
           aria-label="Buscar"
         />
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <button class="btn btn-outline-success" type="submit">
+          Buscar
+        </button>
       </form>
-
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Ayuda</a></li>
       </ul>
-
-      <button mat-flat-button color="accent" (click)="toggleCart()">
-        <mat-icon>shopping_cart</mat-icon>
-        Ver carrito
+      <!-- Botón que abre el Offcanvas -->
+      <button
+        class="btn btn-outline-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#carritoSidebar"
+        aria-controls="carritoSidebar"
+      >
+        🛒 Ver carrito
       </button>
     </div>
   </div>
 </nav>
 
-<aside class="cart-sidebar" [class.open]="isCartOpen">
-  <div class="cart-container">
-    <button class="cart-close" (click)="closeCart()">×</button>
-    <div class="cart-content">
-      <app-cart></app-cart>
-    </div>
-  </div>
-</aside>
+<!-- Inyectamos el componente Cart que contiene el Offcanvas -->
+<app-cart></app-cart>

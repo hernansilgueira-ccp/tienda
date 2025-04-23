@@ -1,58 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { ProductoService } from '../services/product.service';
+import { ProductoService, Producto } from '../services/product.service';
 import { CartService } from '../services/cart.service';
-// (Opcional: importar modelo Product o CartItem si existe)
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule],
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.css']
 })
-export class ProductListComponent implements OnInit {
-  products: any[] = []; // Lista de productos; usar "any" o definir una interfaz que incluya 'quantity'
-  productosAgrupados: any[][] = [];
+export class ProductListComponentComponent implements OnInit {
+  productos: (Producto & { cantidadSeleccionada: number })[] = [];
+  productosAgrupados: (Producto & { cantidadSeleccionada: number })[][] = [];
 
-  constructor(private productService: ProductoService, private cartService: CartService) { }
+  constructor(
+    private productoService: ProductoService,
+    private cartService: CartService
+  ) {}
 
-
-
-ngOnInit(): void {
-  this.productService.getProductos().subscribe((productos) => {
-    this.products = productos.map(prod => ({
-      ...prod,
-      quantity: 1
-    }));
-    this.productosAgrupados = this.agruparEnGrupos(this.products, 4);
-  });
-}
-
-private agruparEnGrupos(productos: any[], cantidad: number): any[][] {
-  const grupos = [];
-  for (let i = 0; i < productos.length; i += cantidad) {
-    grupos.push(productos.slice(i, i + cantidad));
-  }
-  return grupos;
-}
-
-  incrementQuantity(product: any): void {
-    product.quantity++;
+  ngOnInit(): void {
+    this.productoService.getProductos().subscribe(list => {
+      // Inicializamos cantidadSeleccionada en 1
+      this.productos = list.map(p => ({ ...p, cantidadSeleccionada: 1 }));
+      // Agrupamos de a 4 para el carrusel
+      this.productosAgrupados = this.agruparEnGrupos(this.productos, 4);
+    });
   }
 
-  decrementQuantity(product: any): void {
-    if (product.quantity > 1) {
-      product.quantity--;
+  private agruparEnGrupos(
+    arr: (Producto & { cantidadSeleccionada: number })[],
+    size: number
+  ): (Producto & { cantidadSeleccionada: number })[][] {
+    const grupos: (Producto & { cantidadSeleccionada: number })[][] = [];
+    for (let i = 0; i < arr.length; i += size) {
+      grupos.push(arr.slice(i, i + size));
+    }
+    return grupos;
+  }
+
+  decrementar(producto: Producto & { cantidadSeleccionada: number }): void {
+    if (producto.cantidadSeleccionada > 1) {
+      producto.cantidadSeleccionada--;
     }
   }
 
-  addToCart(product: any): void {
-    // Llamar al servicio del carrito para agregar el producto con la cantidad seleccionada
-    this.cartService.addToCart(product);
-    // Reiniciar la cantidad a 1 luego de agregar al carrito (opcional, para futuras selecciones)
-    product.quantity = 1;
+  incrementar(producto: Producto & { cantidadSeleccionada: number }): void {
+    producto.cantidadSeleccionada++;
+  }
+
+  addToCart(producto: Producto & { cantidadSeleccionada: number }): void {
+    this.cartService.addToCart(producto);
+    producto.cantidadSeleccionada = 1;
   }
 }

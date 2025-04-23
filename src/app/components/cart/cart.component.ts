@@ -3,21 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cart-item.model';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
@@ -37,23 +27,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  removeItem(i: number): void { 
-    this.cartService.removeFromCart(i); 
+  removeItem(i: number): void {
+    this.cartItems.splice(i, 1);             // actualización visual inmediata
+    this.cartService.removeFromCart(i);      // y persistencia en el servicio
   }
 
-  increase(i: number): void { 
-    this.cartService.increaseQuantity(i); 
-  }
-
-  decrease(i: number): void { 
-    this.cartService.decreaseQuantity(i); 
-  }
-
-  clearCart(): void { 
-    this.cartService.clearCart(); 
-  }
-
-  getTotal(): number { 
-    return this.cartService.getTotalPrice(); 
+  getTotal(): number {
+    return this.cartService.getTotalPrice();
   }
 }

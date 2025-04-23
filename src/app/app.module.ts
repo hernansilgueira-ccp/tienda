@@ -6,7 +6,7 @@ import { CartComponent } from './components/cart/cart.component';
 // Importar módulos de Angular Material necesarios:
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
-    NgbCarousel,
+    NgbCarouselModule,
     MatIconModule,
     MatButtonModule
   ],
