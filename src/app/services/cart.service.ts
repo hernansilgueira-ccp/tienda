@@ -1,43 +1,70 @@
+// cart.service.ts
 import { Injectable } from '@angular/core';
-import { CartItem } from '../models/cart-item.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartService {
-  private cartItems: CartItem[] = [];
+  private cart: any[] = [];
 
-  getCartItems(): CartItem[] {
-    return this.cartItems;
+  private descuento = 0;
+  
+  getCart() {
+    return this.cart;
   }
 
-  addToCart(item: CartItem) {
-    
-    this.cartItems.push(item);
-  }
-
-  removeFromCart(index: number) {
-    this.cartItems.splice(index, 1);
-  }
-
-  increaseQuantity(index: number) {
-    if (this.cartItems[index]) {
-      this.cartItems[index].quantity++;
+  addToCart(product: any, quantity: number = 1) {
+    const item = this.cart.find(p => p.id === product.id);
+    if (item) {
+      item.quantity += quantity;
+    } else {
+      this.cart.push({ ...product, quantity });
     }
   }
 
-  decreaseQuantity(index: number) {
-    if (this.cartItems[index] && this.cartItems[index].quantity > 1) {
-      this.cartItems[index].quantity--;
-    }
+  removeFromCart(productId: number) {
+    this.cart = this.cart.filter(p => p.id !== productId);
   }
 
-  getTotalPrice(): number {
-    let total = 0;
-    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  updateQuantity(productId: number, quantity: number) {
+    const item = this.cart.find(p => p.id === productId);
+    if (item) {
+      item.quantity = quantity;
+    }
   }
 
   clearCart() {
-    this.cartItems = [];
+    this.cart = [];
   }
+
+  getTotal(): number {
+    return this.cart.reduce((acc, item) => acc + item.precio * item.quantity, 0);
+  }
+
+private coupons: { [code: string]: number } = {
+  'DESCUENTO10': 0.10, // 10%
+  'MITIENDA25': 0.25   // 25%
+};
+
+private appliedDiscount = 0;
+
+applyCoupon(code: string): boolean {
+  if (code.length !== 8) return false;
+
+  const porcentajeStr = code.slice(-2); // últimos 2 caracteres
+  const porcentaje = parseInt(porcentajeStr, 10);
+
+  if (!isNaN(porcentaje) && porcentaje > 0 && porcentaje <= 99) {
+    this.descuento = porcentaje;
+    return true;
+  }
+  return false;
 }
+
+getTotalWithDiscount() {
+  const total = this.getTotal();
+  return total * ((100 - this.descuento) / 100);
+}
+
+}
+
