@@ -1,5 +1,11 @@
 <div class="container-fluid">
     <app-header-component></app-header-component>
+    <!-- Por ejemplo, en tu header -->
+  <button (click)="toggleCart()" class="btn-cart">
+    🛒 Carrito
+  </button>
+  <app-cart *ngIf="mostrarCarrito" class="cart-sidebar" (cerrarCarrito)="toggleCart()"></app-cart>
+  
     <app-main></app-main>
     <app-product-list></app-product-list>
     <router-outlet></router-outlet>

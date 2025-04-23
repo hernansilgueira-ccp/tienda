@@ -1,59 +1,72 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// cart.component.ts
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { CartItem } from '../../models/cart-item.model';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, MatCardModule,MatListModule,MatIconModule],
+  imports: [CommonModule, FormsModule ],
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
-
+  styleUrls: ['./cart.component.css']
 })
-
 export class CartComponent implements OnInit {
-  cartItems: CartItem[] = [];
-
-  
+  cartItems: any[] = [];
+  couponCode: string = '';
+  discountApplied: boolean = false;
+  total: number = 0;
+  totalWithDiscount: number = 0;
+  @Output() cerrarCarrito = new EventEmitter<void>();
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.cartItems = this.cartService.getCartItems();
-  }
-  
-  toggleCart(): void {
-    // Lógica para mostrar u ocultar el carrito
-  }
-  removeItem(index: number) {
-    this.cartService.removeFromCart(index);
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de eliminar
+    this.loadCart();
   }
 
-  increaseQuantity(index: number) {
-    this.cartService.increaseQuantity(index);
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de incrementar
+  loadCart() {
+    this.cartItems = this.cartService.getCart();
+    this.calculateTotal();
   }
 
-  decreaseQuantity(index: number) {
-    this.cartService.decreaseQuantity(index);
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de decrementar
+  increaseQty(item: any) {
+    this.cartService.updateQuantity(item.id, item.quantity + 1);
+    this.loadCart();
   }
 
-  getTotal() {
-    return this.cartService.getTotalPrice();
+  decreaseQty(item: any) {
+    if (item.quantity > 1) {
+      this.cartService.updateQuantity(item.id, item.quantity - 1);
+      this.loadCart();
+    }
   }
 
-  clearCart() {
-    this.cartService.clearCart();
-    this.cartItems = this.cartService.getCartItems(); // Actualiza la lista después de vaciar
+  removeItem(id: number) {
+    this.cartService.removeFromCart(id);
+    this.loadCart();
   }
 
-  //@ViewChild(CartComponent) cartComponent: CartComponent = {} as CartComponent;
+  applyCoupon() {
+    const applied = this.cartService.applyCoupon(this.couponCode);
+    this.discountApplied = applied;
+    if (applied) {
+      this.totalWithDiscount = this.cartService.getTotalWithDiscount();
+    } else {
+      this.totalWithDiscount = 0;
+    }
+  }
+
+  calculateTotal() {
+    this.total = this.cartService.getTotal();
+    if (this.discountApplied) {
+      this.totalWithDiscount = this.cartService.getTotalWithDiscount();
+    }
+  }
+  // cart.component.ts
+
+
+
 
 }

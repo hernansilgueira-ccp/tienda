@@ -1,41 +1,28 @@
-<mat-card class="cart-card">
-  <mat-card-header>
-    <mat-card-title>🛒 Carrito de Compras</mat-card-title>
-  </mat-card-header>
+<h2>Tu carrito</h2>
 
-  <mat-card-content *ngIf="cartItems.length === 0">
-    <p>El carrito está vacío.</p>
-  </mat-card-content>
+<div *ngFor="let item of cartItems" class="cart-item">
+  <p><strong>{{ item.name }}</strong> - {{ item.price | currency:'USD' }}</p>
+  <div>
+    <button (click)="decreaseQty(item)">-</button>
+    {{ item.quantity }}
+    <button (click)="increaseQty(item)">+</button>
+    <button (click)="removeItem(item.id)">🗑️ Quitar</button>
+  </div>
+</div>
 
-  <mat-list *ngIf="cartItems.length > 0">
-    <mat-list-item *ngFor="let item of cartItems; let i = index">
-      <div class="item-details">
-        <img [src]="item.imageUrl" alt="{{ item.name }}" class="item-image" />
-        <div class="item-info">
-          <h3>{{ item.name }}</h3>
-          <p>Cantidad: {{ item.quantity }}</p>
-          <p>Precio: ${{ item.price }}</p>
-        </div>
-      </div>
+<hr>
 
-      <div class="item-actions">
-        <button mat-icon-button (click)="decreaseQuantity(i)">
-          <mat-icon>remove</mat-icon>
-        </button>
-        <button mat-icon-button (click)="increaseQuantity(i)">
-          <mat-icon>add</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="removeItem(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </mat-list-item>
-  </mat-list>
+<p><strong>Total:</strong> {{ total | currency:'USD' }}</p>
 
-  <mat-card-actions *ngIf="cartItems.length > 0">
-    <div class="total">
-      <p><strong>Total:</strong> ${{ getTotal() }}</p>
-    </div>
-    <button mat-raised-button color="primary" (click)="clearCart()">Vaciar Carrito</button>
-  </mat-card-actions>
-</mat-card>
+<div>
+  <input [(ngModel)]="couponCode" placeholder="Código de cupón">
+  <button (click)="applyCoupon()">Aplicar cupón</button>
+</div>
+
+<div *ngIf="discountApplied">
+  <p><strong>Total con descuento:</strong> {{ totalWithDiscount | currency:'USD' }}</p>
+</div>
+<div *ngIf="!discountApplied && couponCode">
+  <p style="color: red;">Cupón inválido</p>
+</div>
+<button (click)="cerrarCarrito.emit()" class="btn-cerrar">✖️</button>
