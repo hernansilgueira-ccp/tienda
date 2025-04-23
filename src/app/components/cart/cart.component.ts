@@ -28,8 +28,13 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   removeItem(i: number): void {
-    this.cartItems.splice(i, 1);             // actualización visual inmediata
-    this.cartService.removeFromCart(i);      // y persistencia en el servicio
+    const el = document.getElementById(`item-${i}`);
+    if (el) {
+      el.classList.add('removing');
+      setTimeout(() => {
+        this.cartService.removeFromCart(i);
+      }, 300);
+    }
   }
 
   getTotal(): number {

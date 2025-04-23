@@ -1,49 +1,25 @@
-<!-- Offcanvas Sidebar -->
-<div
-  class="offcanvas offcanvas-end"
-  tabindex="-1"
-  id="carritoSidebar"
-  aria-labelledby="carritoSidebarLabel"
->
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="carritoSidebarLabel">Resumen del carrito</h5>
+<h4 class="mb-3">Resumen del carrito</h4>
+<ul class="list-group">
+  <li
+    *ngFor="let item of cartItems; let i = index"
+    class="list-group-item d-flex justify-content-between align-items-center"
+    [attr.id]="'item-' + i"
+  >
+    <div>
+      <strong>{{ item.name }}</strong><br>
+      <small class="text-muted">Cantidad: {{ item.quantity }}</small>
+    </div>
     <button
-      type="button"
-      class="btn-close text-reset"
-      data-bs-dismiss="offcanvas"
-      aria-label="Cerrar"
-    ></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul class="list-group">
-      <li
-        *ngFor="let item of cartItems; let i = index"
-        class="list-group-item d-flex justify-content-between align-items-center"
-        [class.removing]="false"
-        [attr.id]="'item-' + i"
-      >
-        <div>
-          <strong>{{ item.name }}</strong>
-          <div class="small text-muted">Cantidad: {{ item.quantity }}</div>
-        </div>
-        <button
-          class="btn btn-sm btn-outline-danger"
-          (click)="removeItem(i)"
-        >
-          Eliminar
-        </button>
-      </li>
-    </ul>
-    <div
-      *ngIf="cartItems.length === 0"
-      class="text-center text-muted mt-3"
+      class="btn btn-sm btn-outline-danger"
+      (click)="removeItem(i)"
     >
-      El carrito está vacío.
-    </div>
-  </div>
-  <div class="offcanvas-footer p-3 border-top">
-    <div class="d-flex justify-content-between align-items-center">
-      <strong>Total:</strong> ${{ getTotal() }}
-    </div>
-  </div>
+      Eliminar
+    </button>
+  </li>
+</ul>
+<div *ngIf="cartItems.length === 0" class="text-center text-muted my-3">
+  El carrito está vacío.
+</div>
+<div class="mt-auto pt-3 border-top">
+  <strong>Total: ${{ getTotal() }}</strong>
 </div>

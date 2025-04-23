@@ -1,18 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './product-list-component/product-list-component.component';
+import { HeaderComponentComponent } from './header-component/header-component.component';
+import { ProductListComponentComponent } from './product-list-component/product-list-component.component';
 import { CartComponent } from './components/cart/cart.component';
-// Importar módulos de Angular Material necesarios:
+
+// Módulos de Bootstrap y Angular Material
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
+    HeaderComponentComponent,
+    ProductListComponentComponent,
     CartComponent,
   ],
   imports: [
