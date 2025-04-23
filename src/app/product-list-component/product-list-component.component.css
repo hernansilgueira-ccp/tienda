@@ -167,10 +167,8 @@
     right: 0;
   }
   /* product-list.component.css */
-.card-img-top {
-  height: 150px;
-  object-fit: cover;
-}
+  .card-img-top { height: 180px; object-fit: cover; }
+
 /* src/app/product-list-component.component.css */
 /* Si tienes una clase contenedora para el carrusel, por ejemplo: */
 /* .mi-carousel .carousel-control-prev, */

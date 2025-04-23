@@ -1,7 +1,6 @@
-<!-- frontend/src/app/components/cart/cart.component.html -->
-<mat-card class="p-2">
+<mat-card class="cart-card">
   <mat-card-header>
-    <mat-card-title>Carrito</mat-card-title>
+    <mat-card-title>Carrito de Compras</mat-card-title>
   </mat-card-header>
 
   <mat-card-content *ngIf="cartItems.length === 0">
@@ -10,14 +9,21 @@
 
   <mat-list *ngIf="cartItems.length > 0">
     <mat-list-item *ngFor="let item of cartItems; let i = index">
-      <div class="d-flex justify-content-between w-100 align-items-center">
+      <div class="d-flex justify-content-between align-items-center w-100">
         <div>
-          {{ item.name }} × {{ item.quantity }} — ${{ item.price }}
+          <img [src]="item.imageUrl" alt="{{item.name}}" class="me-2" width="40"/>
+          {{item.name}} × {{item.quantity}} — ${{item.price}}
         </div>
         <div>
-          <button mat-icon-button (click)="decrease(i)"><mat-icon>remove</mat-icon></button>
-          <button mat-icon-button (click)="increase(i)"><mat-icon>add</mat-icon></button>
-          <button mat-icon-button color="warn" (click)="removeItem(i)"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="decrease(i)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <button mat-icon-button (click)="increase(i)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="removeItem(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
     </mat-list-item>
@@ -25,6 +31,8 @@
 
   <mat-card-actions *ngIf="cartItems.length > 0" class="d-flex justify-content-between">
     <div><strong>Total:</strong> ${{ getTotal() }}</div>
-    <button mat-stroked-button color="primary" (click)="clearCart()">Vaciar</button>
+    <button mat-stroked-button color="primary" (click)="clearCart()">
+      Vaciar Carrito
+    </button>
   </mat-card-actions>
 </mat-card>

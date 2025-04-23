@@ -1,4 +1,3 @@
-// frontend/src/app/components/product-list/product-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +11,7 @@ import { ProductoService, Producto } from '../services/product.service';
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponentComponent implements OnInit {
   productos: Producto[] = [];
 
   constructor(

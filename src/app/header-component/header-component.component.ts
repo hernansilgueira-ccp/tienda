@@ -1,4 +1,3 @@
-// frontend/src/app/header-component/header-component.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';

@@ -1,4 +1,3 @@
-// frontend/src/app/services/cart.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
@@ -20,9 +19,7 @@ export class CartService {
 
   private saveAndEmit() {
     const list = this.items$.value;
-    try {
-      sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(list));
-    } catch {}
+    try { sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(list)); } catch {}
     this.items$.next([...list]);
   }
 
@@ -33,31 +30,22 @@ export class CartService {
   addToCart(item: CartItem): void {
     const list = this.items$.value;
     const idx = list.findIndex(i => i.id === item.id);
-    if (idx > -1) {
-      list[idx].quantity += item.quantity;
-    } else {
-      list.push({ ...item });
-    }
+    if (idx > -1) list[idx].quantity += item.quantity;
+    else list.push({ ...item });
     this.saveAndEmit();
   }
 
   removeFromCart(i: number): void {
-    const list = this.items$.value;
-    list.splice(i, 1);
-    this.saveAndEmit();
+    const list = this.items$.value; list.splice(i, 1); this.saveAndEmit();
   }
 
   increaseQuantity(i: number): void {
-    this.items$.value[i].quantity++;
-    this.saveAndEmit();
+    this.items$.value[i].quantity++; this.saveAndEmit();
   }
 
   decreaseQuantity(i: number): void {
     const list = this.items$.value;
-    if (list[i].quantity > 1) {
-      list[i].quantity--;
-      this.saveAndEmit();
-    }
+    if (list[i].quantity > 1) { list[i].quantity--; this.saveAndEmit(); }
   }
 
   clearCart(): void {
