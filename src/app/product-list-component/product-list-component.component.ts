@@ -1,28 +1,43 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { ProductoService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
 // (Opcional: importar modelo Product o CartItem si existe)
 
 @Component({
-  selector: 'app-product-list-component',
+  selector: 'app-product-list',
+  standalone: true,
+  imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: any[] = [];  // Lista de productos; usar "any" o definir una interfaz que incluya 'quantity'
+  products: any[] = []; // Lista de productos; usar "any" o definir una interfaz que incluya 'quantity'
+  productosAgrupados: any[][] = [];
 
   constructor(private productService: ProductoService, private cartService: CartService) { }
 
-  ngOnInit(): void {
-    // Obtener productos del servicio
-    this.productService.getProductos().subscribe(productos => {
-      // Asegurarse de agregar la propiedad quantity a cada producto, inicializada en 1
-      this.products = productos.map(prod => {
-        return { ...prod, quantity: 1 };  // copia todos los campos del producto y añade quantity
-      });
-    });
+
+
+ngOnInit(): void {
+  this.productService.getProductos().subscribe((productos) => {
+    this.products = productos.map(prod => ({
+      ...prod,
+      quantity: 1
+    }));
+    this.productosAgrupados = this.agruparEnGrupos(this.products, 4);
+  });
+}
+
+private agruparEnGrupos(productos: any[], cantidad: number): any[][] {
+  const grupos = [];
+  for (let i = 0; i < productos.length; i += cantidad) {
+    grupos.push(productos.slice(i, i + cantidad));
   }
+  return grupos;
+}
 
   incrementQuantity(product: any): void {
     product.quantity++;

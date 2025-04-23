@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cart-item.model';
-import { Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,18 +27,33 @@ export class CartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sub = this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
     });
   }
-  ngOnDestroy() {
+
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  removeItem(i: number) { this.cartService.removeFromCart(i); }
-  increase(i: number)   { this.cartService.increaseQuantity(i); }
-  decrease(i: number)   { this.cartService.decreaseQuantity(i); }
-  clearCart()           { this.cartService.clearCart(); }
-  getTotal(): number    { return this.cartService.getTotalPrice(); }
+  removeItem(i: number): void { 
+    this.cartService.removeFromCart(i); 
+  }
+
+  increase(i: number): void { 
+    this.cartService.increaseQuantity(i); 
+  }
+
+  decrease(i: number): void { 
+    this.cartService.decreaseQuantity(i); 
+  }
+
+  clearCart(): void { 
+    this.cartService.clearCart(); 
+  }
+
+  getTotal(): number { 
+    return this.cartService.getTotalPrice(); 
+  }
 }

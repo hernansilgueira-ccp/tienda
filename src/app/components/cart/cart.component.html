@@ -3,16 +3,18 @@
     <mat-card-title>Carrito de Compras</mat-card-title>
   </mat-card-header>
 
+  <!-- Mostrar mensaje si el carrito está vacío -->
   <mat-card-content *ngIf="cartItems.length === 0">
     <p>El carrito está vacío.</p>
   </mat-card-content>
 
+  <!-- Lista de items en el carrito si hay elementos -->
   <mat-list *ngIf="cartItems.length > 0">
     <mat-list-item *ngFor="let item of cartItems; let i = index">
       <div class="d-flex justify-content-between align-items-center w-100">
         <div>
-          <img [src]="item.imageUrl" alt="{{item.name}}" class="me-2" width="40"/>
-          {{item.name}} × {{item.quantity}} — ${{item.price}}
+          <img [src]="item.imageUrl" alt="{{ item.name }}" class="me-2" width="40" />
+          {{ item.name }} × {{ item.quantity }} — ${{ item.price }}
         </div>
         <div>
           <button mat-icon-button (click)="decrease(i)">
@@ -29,10 +31,9 @@
     </mat-list-item>
   </mat-list>
 
+  <!-- Acciones del carrito (total y vaciar) -->
   <mat-card-actions *ngIf="cartItems.length > 0" class="d-flex justify-content-between">
     <div><strong>Total:</strong> ${{ getTotal() }}</div>
-    <button mat-stroked-button color="primary" (click)="clearCart()">
-      Vaciar Carrito
-    </button>
+    <button mat-stroked-button color="primary" (click)="clearCart()">Vaciar Carrito</button>
   </mat-card-actions>
 </mat-card>

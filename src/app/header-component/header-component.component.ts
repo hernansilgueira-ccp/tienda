@@ -4,8 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CartComponent } from '../components/cart/cart.component';
 
 @Component({
-  standalone: true,
   selector: 'app-header-component',
+  standalone: true,
   imports: [CommonModule, MatIconModule, CartComponent],
   templateUrl: './header-component.component.html',
   styleUrls: ['./header-component.component.css']
