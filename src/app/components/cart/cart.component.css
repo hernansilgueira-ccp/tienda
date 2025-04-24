@@ -185,3 +185,123 @@ button {
   font-size: 20px;
 }
 
+
+.cart-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem; /* Tamaño general de texto */
+}
+
+.cart-card h4 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.cart-card .precio {
+  font-size: 0.9rem;
+}
+
+.cart-card .cantidad {
+  font-size: 0.85rem;
+}
+
+.cart-card .remove-btn {
+  font-size: 0.8rem;
+}
+
+input, button {
+  font-size: 0.9rem !important;
+}
+@media (max-width: 600px) {
+  :host {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+p {
+  margin: 0.5rem 0;
+}
+
+.fs-5 {
+  font-size: 1.1rem;
+}
+
+.text-success {
+  color: #198754;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+:host {
+  display: block;
+  padding: 1.5rem;
+  background: #f9f9f9; /* fondo claro */
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* sombra suave */
+  max-width: 400px;
+  margin-left: auto;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Ajustar el botón cerrar */
+.close-btn {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Tarjetas de producto */
+.cart-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Imagen del producto */
+.product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* Info producto */
+.info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+.precio {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.cantidad {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 0.9rem;
+  cursor: pointer;
+}

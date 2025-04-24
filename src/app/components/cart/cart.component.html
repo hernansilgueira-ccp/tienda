@@ -20,14 +20,14 @@
 
   <hr>
 
-  <p><strong>Total:</strong> {{ total | currency:'USD' }}</p>
-
+  <!--<p><strong>Subtotal:</strong> {{ total | currency:'USD' }}</p>
+-->
   <div class="mt-4 p-3 border rounded bg-light">
     <label for="couponInput" class="form-label">¿Tienes un cupón?</label>
     <div class="input-group">
       <input
         id="couponInput"
-        class="form-control"
+        class="form-control text-uppercase"
         [(ngModel)]="couponCode"
         placeholder="Ej: TIENDA25"
         maxlength="8"
@@ -35,16 +35,30 @@
       />
       <button class="btn btn-outline-success" (click)="applyCoupon()">Aplicar</button>
     </div>
-    
-    <div *ngIf="couponFeedback" class="mt-2" [ngClass]="{ 'text-success': discountApplied, 'text-danger': !discountApplied }">
-      {{ couponFeedback }}
-    </div>
-  
-    <div *ngIf="discountApplied" class="mt-2">
-      <p><strong>Total con descuento:</strong> {{ totalWithDiscount | currency:'USD' }}</p>
-    </div>
+    <hr>
+
+<!-- Total antes del descuento -->
+<p class="d-flex justify-content-between">
+  <span><strong>Total:</strong></span>
+  <span>{{ total | currency:'USD' }}</span>
+</p>
+
+<!-- Descuento aplicado -->
+<p *ngIf="discountApplied" class="d-flex justify-content-between text-success">
+  <span>
+    <strong>💸 Descuento:</strong>
+  </span>
+  <span>-{{ descuentoAplicado | currency:'USD' }}</span>
+</p>
+
+<!-- Total con descuento -->
+<p *ngIf="discountApplied" class="d-flex justify-content-between fs-5">
+  <span><strong>Total a pagar:</strong></span>
+  <span><strong>{{ totalWithDiscount | currency:'USD' }}</strong></span>
+</p>
+
   </div>
-  
+
   
 </div>
 <div class="text-end mt-4">

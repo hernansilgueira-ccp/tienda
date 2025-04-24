@@ -71,8 +71,9 @@ export class ProductListComponent implements OnInit {
     };
 
     this.cartService.addToCart(productoNormalizado);
-    //producto.quantity = 1;
     producto.agregado = true;
+    producto.quantity = 1;
+    
     console.log(this.cartService.getCart())
     
     setTimeout(() => {

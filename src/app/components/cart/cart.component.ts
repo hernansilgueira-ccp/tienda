@@ -73,6 +73,9 @@ export class CartComponent implements OnInit {
     }
   }
   
+  get descuentoAplicado(): number {
+    return this.discountApplied ? this.total - this.totalWithDiscount : 0;
+  }
   
   
 
