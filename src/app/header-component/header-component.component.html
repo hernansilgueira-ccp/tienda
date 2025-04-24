@@ -1,15 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <!-- Logo -->
     <a class="navbar-brand" href="#">
       <img
         src="images/logo033_mini.png"
-        alt="Logo"
+        alt="Logo de Tienda"
+        class="img-fluid"
         style="max-height:80px;"
       />
     </a>
-
-    <!-- Toggle para móviles -->
     <button
       class="navbar-toggler"
       type="button"
@@ -22,9 +20,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menú colapsable -->
     <div class="collapse navbar-collapse" id="headerNavbar">
-      <!-- Buscador -->
       <form class="d-flex mx-auto">
         <input
           class="form-control me-2"
@@ -37,7 +33,6 @@
         </button>
       </form>
 
-      <!-- Links del menú -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
@@ -45,7 +40,6 @@
         <li class="nav-item"><a class="nav-link" href="#">Ayuda</a></li>
       </ul>
 
-      <!-- Botón para abrir el offcanvas del carrito -->
       <button
         class="btn btn-outline-primary ms-3"
         type="button"
@@ -60,5 +54,4 @@
   </div>
 </nav>
 
-<!-- Inyectamos el componente Cart, que contiene el offcanvas -->
 <app-cart></app-cart>

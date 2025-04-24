@@ -5,8 +5,9 @@ import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cart-item.model';
 
 @Component({
-  selector: 'app-cart',
   standalone: true,
+  selector: 'app-cart',
+  host: { '[attr.ngSkipHydration]': 'true' },
   imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
@@ -31,9 +32,7 @@ export class CartComponent implements OnInit, OnDestroy {
     const el = document.getElementById(`item-${i}`);
     if (el) {
       el.classList.add('removing');
-      setTimeout(() => {
-        this.cartService.removeFromCart(i);
-      }, 300);
+      setTimeout(() => this.cartService.removeFromCart(i), 300);
     }
   }
 

@@ -7,7 +7,6 @@ import { CartComponent } from '../components/cart/cart.component';
 @Component({
   standalone: true,
   selector: 'app-header-component',
-  // Evita problemas de hydration con el <a> del logo
   host: { '[attr.ngSkipHydration]': 'true' },
   imports: [
     CommonModule,
