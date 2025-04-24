@@ -64,4 +64,42 @@
     font-weight: bold;
     cursor: pointer;
   }
+  .cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0%);
+    padding: 20px;
+  }
+  
+  /* Botón flotante opcional */
+  .btn-cart {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    z-index: 1001;
+    cursor: pointer;
+  }
   

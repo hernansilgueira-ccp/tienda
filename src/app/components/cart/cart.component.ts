@@ -3,6 +3,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 
 @Component({
@@ -18,6 +21,12 @@ export class CartComponent implements OnInit {
   discountApplied: boolean = false;
   total: number = 0;
   totalWithDiscount: number = 0;
+  descuento: number = 0;
+
+  couponFeedback: string = '';
+  
+
+
   @Output() cerrarCarrito = new EventEmitter<void>();
 
   constructor(private cartService: CartService) {}
@@ -28,6 +37,7 @@ export class CartComponent implements OnInit {
 
   loadCart() {
     this.cartItems = this.cartService.getCart();
+    console.log("🛒 Items en el carrito:", this.cartItems);
     this.calculateTotal();
   }
 
@@ -49,14 +59,22 @@ export class CartComponent implements OnInit {
   }
 
   applyCoupon() {
-    const applied = this.cartService.applyCoupon(this.couponCode);
+    const code = this.couponCode.trim();
+    const applied = this.cartService.applyCoupon(code);
+  
     this.discountApplied = applied;
+  
     if (applied) {
       this.totalWithDiscount = this.cartService.getTotalWithDiscount();
+      this.couponFeedback = `✅ Cupón aplicado: ${this.cartService.getDescuento()}% de descuento.`;
     } else {
       this.totalWithDiscount = 0;
+      this.couponFeedback = '❌ Cupón inválido. Usa un código válido de 8 caracteres, como MITIENDA25.';
     }
   }
+  
+  
+  
 
   calculateTotal() {
     this.total = this.cartService.getTotal();
@@ -64,9 +82,25 @@ export class CartComponent implements OnInit {
       this.totalWithDiscount = this.cartService.getTotalWithDiscount();
     }
   }
-  // cart.component.ts
+  
+  cerrar() {
+    this.cerrarCarrito.emit();
+  }
 
 
+  compraFinalizada: boolean = false;
+
+finalizarCompra() {
+  // Aquí puedes simular el envío o resetear el carrito
+  this.cartService.clearCart();
+  this.loadCart();
+  this.compraFinalizada = true;
+
+  // Ocultar el mensaje después de unos segundos
+  setTimeout(() => {
+    this.compraFinalizada = false;
+  }, 2000);
+}
 
 
 }
