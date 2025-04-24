@@ -1,28 +1,76 @@
-<h2>Tu carrito</h2>
+<button (click)="cerrar()" class="close-btn">✖</button>
 
-<div *ngFor="let item of cartItems" class="cart-item">
-  <p><strong>{{ item.name }}</strong> - {{ item.price | currency:'USD' }}</p>
-  <div>
-    <button (click)="decreaseQty(item)">-</button>
-    {{ item.quantity }}
-    <button (click)="increaseQty(item)">+</button>
-    <button (click)="removeItem(item.id)">🗑️ Quitar</button>
+<h2 style="margin-bottom: 1rem;">🛒 Tu Carrito</h2>
+
+<div *ngIf="cartItems.length > 0; else carritoVacio">
+  <div *ngFor="let item of cartItems" class="cart-card">
+    <img [src]="item.imagen" alt="{{ item.nombre }}" class="product-image">
+
+    <div class="info">
+      <h4>{{ item.nombre }}</h4>
+      <p class="precio">Precio: {{ item.precio | currency:'USD' }}</p>
+      <div class="cantidad">
+        <button (click)="decreaseQty(item)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increaseQty(item)">+</button>
+      </div>
+      <button (click)="removeItem(item.id)" class="remove-btn">🗑️ Quitar</button>
+    </div>
   </div>
+
+  <hr>
+
+  <!--<p><strong>Subtotal:</strong> {{ total | currency:'USD' }}</p>
+-->
+  <div class="mt-4 p-3 border rounded bg-light">
+    <label for="couponInput" class="form-label">¿Tienes un cupón?</label>
+    <div class="input-group">
+      <input
+        id="couponInput"
+        class="form-control text-uppercase"
+        [(ngModel)]="couponCode"
+        placeholder="Ej: TIENDA25"
+        maxlength="8"
+        [disabled]="discountApplied"
+      />
+      <button class="btn btn-outline-success" (click)="applyCoupon()">Aplicar</button>
+    </div>
+    <hr>
+
+<!-- Total antes del descuento -->
+<p class="d-flex justify-content-between">
+  <span><strong>Total:</strong></span>
+  <span>{{ total | currency:'USD' }}</span>
+</p>
+
+<!-- Descuento aplicado -->
+<p *ngIf="discountApplied" class="d-flex justify-content-between text-success">
+  <span>
+    <strong>💸 Descuento:</strong>
+  </span>
+  <span>-{{ descuentoAplicado | currency:'USD' }}</span>
+</p>
+
+<!-- Total con descuento -->
+<p *ngIf="discountApplied" class="d-flex justify-content-between fs-5">
+  <span><strong>Total a pagar:</strong></span>
+  <span><strong>{{ totalWithDiscount | currency:'USD' }}</strong></span>
+</p>
+
+  </div>
+
+  
+</div>
+<div class="text-end mt-4">
+  <button class="btn btn-primary" (click)="finalizarCompra()" [disabled]="cartItems.length === 0">
+    🧾 Finalizar compra
+  </button>
 </div>
 
-<hr>
-
-<p><strong>Total:</strong> {{ total | currency:'USD' }}</p>
-
-<div>
-  <input [(ngModel)]="couponCode" placeholder="Código de cupón">
-  <button (click)="applyCoupon()">Aplicar cupón</button>
+<div *ngIf="compraFinalizada" class="alert alert-success mt-3" role="alert">
+  🎉 ¡Gracias por tu compra! Recibirás un correo con los detalles.
 </div>
 
-<div *ngIf="discountApplied">
-  <p><strong>Total con descuento:</strong> {{ totalWithDiscount | currency:'USD' }}</p>
-</div>
-<div *ngIf="!discountApplied && couponCode">
-  <p style="color: red;">Cupón inválido</p>
-</div>
-<button (click)="cerrarCarrito.emit()" class="btn-cerrar">✖️</button>
+<ng-template #carritoVacio>
+  <p>🛍️ Tu carrito está vacío.</p>
+</ng-template>

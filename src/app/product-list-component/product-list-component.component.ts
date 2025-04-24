@@ -4,6 +4,8 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../services/cart.service';
 import { ProductoService, Producto } from '../services/product.service';
 //import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartComponent } from '../components/cart/cart.component';
 
 
 @Component({
@@ -19,7 +21,11 @@ export class ProductListComponent implements OnInit {
 
   //@ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
 
-  constructor(private productoService: ProductoService, private cartService: CartService) {}
+  constructor(
+    private productoService: ProductoService, 
+    private cartService: CartService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.productoService.getProductos().subscribe((data: Producto[]) => {
@@ -58,14 +64,33 @@ export class ProductListComponent implements OnInit {
     }
   }
   agregarAlCarrito(producto: any): void {
-    this.cartService.addToCart(producto);
-    producto.quantity = 1;
-    producto.agregado = true;
 
+    const productoNormalizado = {
+      ...producto,
+      precio: producto.precio ?? producto.price  // asegura que siempre tenga 'precio'
+    };
+
+    this.cartService.addToCart(productoNormalizado);
+    producto.agregado = true;
+    producto.quantity = 1;
+    
+    console.log(this.cartService.getCart())
+    
     setTimeout(() => {
       producto.agregado = false;
     }, 1000);
   }  
+  abrirCarrito() {
+    const modalRef = this.modalService.open(CartComponent, {
+      windowClass: 'modal-right',
+    backdrop: 'static',
+    scrollable: true
+    });
+  
+    const instance = modalRef.componentInstance;
+    instance.cerrarCarrito.subscribe(() => modalRef.close()); // para cerrar con botón personalizado
+  }
+  
   /*
   addToCart(product: any): void {
     const producto = this.productos[this.currentSlide];

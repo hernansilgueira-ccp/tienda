@@ -1,10 +1,23 @@
 <div class="container-fluid">
     <app-header-component></app-header-component>
-    <!-- Por ejemplo, en tu header -->
-  <button (click)="toggleCart()" class="btn-cart">
-    🛒 Carrito
-  </button>
-  <app-cart *ngIf="mostrarCarrito" class="cart-sidebar" (cerrarCarrito)="toggleCart()"></app-cart>
+  
+    <!-- Fondo oscuro -->
+<div class="cart-overlay" *ngIf="mostrarCarrito" (click)="toggleCart()"></div>
+<button (click)="toggleCart()" class="btn-cart">
+  🛒 Carrito
+</button>
+
+<div class="cart-sidebar-wrapper" *ngIf="mostrarCarrito || animating">
+  <div
+    class="cart-sidebar"
+    [@slideInOut]="mostrarCarrito ? 'in' : 'out'"
+    (@slideInOut.done)="onAnimationDone($event)"
+  >
+    <app-cart (cerrarCarrito)="toggleCart()"></app-cart>
+  </div>
+</div>
+
+
   
     <app-main></app-main>
     <app-product-list></app-product-list>

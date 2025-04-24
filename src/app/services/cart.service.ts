@@ -12,22 +12,26 @@ export class CartService {
   getCart() {
     return this.cart;
   }
-
-  addToCart(product: any, quantity: number = 1) {
-    const item = this.cart.find(p => p.id === product.id);
-    if (item) {
-      item.quantity += quantity;
+  getDescuento() {
+    return this.descuento;
+  }
+  
+  addToCart(product: any): void {
+    const existing  = this.cart.find(item => item.id === product.id);
+    
+    if (existing ) {
+      existing.quantity += 1;
     } else {
-      this.cart.push({ ...product, quantity });
+      this.cart.push({ ...product });
     }
   }
 
-  removeFromCart(productId: number) {
-    this.cart = this.cart.filter(p => p.id !== productId);
+  removeFromCart(id: number): void {
+    this.cart = this.cart.filter(item => item.id !== id);
   }
 
-  updateQuantity(productId: number, quantity: number) {
-    const item = this.cart.find(p => p.id === productId);
+  updateQuantity(id: number, quantity: number): void {
+    const item = this.cart.find(i => i.id === id);
     if (item) {
       item.quantity = quantity;
     }
@@ -38,7 +42,7 @@ export class CartService {
   }
 
   getTotal(): number {
-    return this.cart.reduce((acc, item) => acc + item.precio * item.quantity, 0);
+    return this.cart.reduce((sum, item) => sum + item.precio * item.quantity, 0);
   }
 
 private coupons: { [code: string]: number } = {

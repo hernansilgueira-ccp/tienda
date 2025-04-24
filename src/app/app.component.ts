@@ -9,6 +9,14 @@ import { CartComponent } from './components/cart/cart.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductoService, Producto } from './services/product.service';
 import { CartService } from './services/cart.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/animations';
+
 
 @Component({
   standalone: true,
@@ -21,8 +29,22 @@ import { CartService } from './services/cart.service';
     MainComponentComponent,
     ProductListComponent,
     MatIconModule,
-    CartComponent 
+    CartComponent
   ],
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({ transform: 'translateX(0%)' })),
+      state('out', style({ transform: 'translateX(100%)' })),
+      transition('out => in', [
+        style({ transform: 'translateX(100%)' }),
+        animate('300ms ease-in-out')
+      ]),
+      transition('in => out', [
+        animate('300ms ease-in-out', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ],
+  
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -31,6 +53,7 @@ export class AppComponent implements OnInit {
   title = 'tienda';
   couponCode = '';
   totalConDescuento = 0;
+  mostrarCarrito = false;
 
   @ViewChild(CartComponent) cartComponent!: CartComponent;
 
@@ -44,7 +67,25 @@ export class AppComponent implements OnInit {
       this.productos = data;
     });
   }
+  
+  animating = false;
 
+  toggleCart() {
+    console.log('Toggle carrito:', this.mostrarCarrito);
+    if (!this.mostrarCarrito) {
+      this.animating = true;
+    }
+    this.mostrarCarrito = !this.mostrarCarrito;
+  }
+  
+
+onAnimationDone(event: any) {
+  if (!this.mostrarCarrito) {
+    this.animating = false;
+  }
+}
+
+  /*
   agregarProductoDemo() {
     const nuevoProducto: Producto = {
       nombre: 'Producto Demo',
@@ -56,6 +97,7 @@ export class AppComponent implements OnInit {
     };
     this.productos.push(nuevoProducto);
   }
+  */
 
   aplicarCupon(): void {
     if (this.cartService.applyCoupon(this.couponCode)) {
@@ -65,10 +107,4 @@ export class AppComponent implements OnInit {
       alert('Cupón inválido');
     }
   }
-  mostrarCarrito = false;
-
-  toggleCart() {
-  this.mostrarCarrito = !this.mostrarCarrito;
-}
-
 }

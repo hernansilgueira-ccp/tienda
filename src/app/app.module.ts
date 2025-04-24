@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './product-list-component/product-list-component.component';
 import { CartComponent } from './components/cart/cart.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: '', component: ProductListComponent },
@@ -10,22 +15,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),MatIconModule,
+    MatButtonModule,AppRoutingModule, BrowserModule,NgbModalModule,BrowserAnimationsModule],
   exports: [RouterModule]
-=======
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
-@NgModule({
-  declarations: [
-    // otros componentes
-  ],
-  imports: [
-    // otros módulos
-    MatIconModule,
-    MatButtonModule
-  ],
-  // ...
->>>>>>> remotes/origin/Largo
 })
-export class AppRoutingModule {}
+export class AppModule {}
