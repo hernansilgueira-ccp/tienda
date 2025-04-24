@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';  // ← Agregado
+import { MatButtonModule } from '@angular/material/button';
+import { CartComponent } from '../components/cart/cart.component';
 
 @Component({
   standalone: true,
   selector: 'app-header-component',
+  // Evita problemas de hydration con el <a> del logo
   host: { '[attr.ngSkipHydration]': 'true' },
   imports: [
     CommonModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    CartComponent
   ],
   templateUrl: './header-component.component.html',
   styleUrls: ['./header-component.component.css']
 })
-export class HeaderComponentComponent {
-  isCartOpen = false;
-  toggleCart() { this.isCartOpen = !this.isCartOpen; }
-  closeCart() { this.isCartOpen = false; }
-}
+export class HeaderComponentComponent {}
